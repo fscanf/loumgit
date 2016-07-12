@@ -1,0 +1,22 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_suppression_commune', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            <h3>Voulez-vous vraiment supprimer</h3>
+            <p>
+                {{form_errors(form.nomCom)}}
+                {{form_label(form.nomCom, ' le de cette commune ')}}
+                {{form_widget(form.nomCom)}} ?
+            </p>
+            {{form_rest(form)}}
+            <a href="{{path('djama_affichage_commune')}}">Annullez</a>
+            <input type="submit" value="supprimez"/>
+        </form>
+        
+    </body>
+</html>
+{# empty Twig template #}

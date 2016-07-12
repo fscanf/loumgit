@@ -1,0 +1,486 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}<title>{{title}}</title>{% endblock %}
+        
+        <meta http-equiv="\"Content-Type\"" content="\"text/html;charset=utf-8\"">
+        
+        {#{% stylesheets %}
+        <link rel="stylesheet" href="{{ asset('djama/DjamaBundle/bootstrap-3.3.4/css/bootstrap.min.css') }}" />#}
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
+    {#    {% endstylesheets  %}#}
+        {#
+        {% javascripts %} #}
+        <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js') }}"></script>
+        <script src="{{ asset('jQuery-table2excel/src/jquery.table2excel.js') }}"></script>
+    {#    {% endjavascripts %}
+        #}
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+            
+       
+            <h1>On djarama yo GS Kaloum</h1>
+            <br/>
+            <button>Export</button>
+
+        {% if partie is sameas(1) %}
+            <form action="{{path('djama_paiement_eleve')}}" method="post" {{form_enctype(form)}}
+                 {{form_errors(form.choix_classe)}}
+                 {{form_label(form.choix_classe, 'Sélection : ')}}
+                 {{form_widget(form.choix_classe)}}
+                {{form_rest(form)}}
+                <input type="submit" value="Validez"/>
+            </form>
+            
+        {% else %}
+            <script>
+                $("button").click(function(){
+                    $("#table2excel").table2excel({
+                        // exclude CSS class
+                        exclude: ".noExl",
+                        name: "paiement"
+                    });
+                });
+                
+            </script>
+                
+            
+            <div>
+                <table id="customers">
+                   {# <h4>{{titre_table}}</h4>#}
+                    <thead>
+                        <tr id="table2excel">
+                            <th height="30px"> {{photoId}} </th>
+                            <th height="30px"> {{sexe}} </th>              
+                            <th height="30px"> {{nom}} </th>               
+                            <th height="30px"> {{prenom}} </th>            
+                            <th height="30px"> {{montantMens}} </th>             
+                            <th height="30px"> {{montantAnn}} </th>            
+                            <th height="30px"> {{totalPai}} </th>               
+                            <th height="30px"> {{restePai}} </th>               
+                            <th height="30px"> {{datePai1}} </th>         
+                            <th height="30px"> {{octobre}} </th>             
+                            <th height="30px"> {{montantOct}} </th>              
+                            <th height="30px"> {{datePai2}} </th>          
+                            <th height="30px"> {{novembre}} </th>           
+                            <th height="30px"> {{montantNov}} </th>              
+                            <th height="30px"> {{datePai3}} </th>           
+                            <th height="30px"> {{decembre}} </th>            
+                            <th height="30px"> {{montantDec}} </th>           
+                            <th height="30px"> {{datePai4}} </th>           
+                            <th height="30px"> {{janvier}} </th>          
+                            <th height="30px"> {{montantJan}} </th>          
+                            <th height="30px"> {{datePai5}} </th>          
+                            <th height="30px"> {{fevrier}} </th>          
+                            <th height="30px"> {{montantFev}} </th>           
+                            <th height="30px"> {{datePai6}} </th>         
+                            <th height="30px"> {{mars}} </th>           
+                            <th height="30px"> {{montantMars}} </th>           
+                            <th height="30px"> {{datePai7}} </th>        
+                            <th height="30px"> {{avril}} </th>          
+                            <th height="30px"> {{montantAv}} </th>           
+                            <th height="30px"> {{datePai8}} </th>        
+                            <th height="30px"> {{mai}} </th>           
+                            <th height="30px"> {{montantMai}} </th>          
+                            <th height="30px"> {{datePai9}} </th>       
+                            <th height="30px"> {{juin}} </th>          
+                            <th height="30px"> {{montantJuin}} </th> 
+                            <th height="30px"> {{appreciation}} </th>
+                            <th height="30px"> {{comment}} </th>
+                            <th height="30px"> Modification </th>
+                            <th height="30px"> Suppression </th>                            
+                        </tr>
+                    </thead>
+                    {% set vrai = 'true' %} 
+                    {% for elevePaiement in lstPaiement %}  
+                        <tbody>
+                        {% if vrai is sameas ('true')  %} 
+                                <tr>
+                                    {% if elevePaiement['placePhoto'] is null %}
+                                        <td class="color_rougeViolet">Manque Photo</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['placePhoto']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['sexe'] is null %}
+                                        <td class="color_rougeViolet">VIDE</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['sexe']}}</td>
+                                    {% endif %}                                    
+                                    {% if elevePaiement['nom'] is null %}
+                                        <td class="color_rougeViolet">Manque Nom</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['nom']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['prenom'] is null %}
+                                        <td class="color_rougeViolet">Manque Prénom</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['prenom']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMens'] is null %}
+                                        <td class="color_rougeViolet">Manque M. M</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMens']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantAnn'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant A</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantAnn']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['totalPai'] is null %}
+                                        <td class="color_rougeViolet">Manque Total Paiyé</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['totalPai']}}</td>
+                                    {% endif %}
+                                    <td>Reste à Payer</td>
+                                    {% if elevePaiement['datePai1'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai1']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['octobre'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['octobre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantOct'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantOct']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai2'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai2']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['novembre'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['novembre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantNov'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantNov']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai3'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai3']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['decembre'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['decembre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantDec'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantDec']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai4'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai4']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['janvier'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['janvier']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantJan'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantJan']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai5'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai5']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['fevrier'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['fevrier']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantFev'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                      <td>{{elevePaiement['montantFev']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai6'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai6']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['mars'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['mars']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMars'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMars']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai7'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai7']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['avril'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['avril']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantAv'] is null %}
+                                       <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantAv']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai8'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai8']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['mai'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['mai']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMai'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMai']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai9'] is null %}
+                                        <td class="color_rougeViolet">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai9']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['juin'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['juin']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantJuin'] is null %}
+                                        <td class="color_rougeViolet">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantJuin']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['nomAppre'] is null %}
+                                        <td class="color_rougeViolet">Manque Appréciation</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['nomAppre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['commentaire'] is null %}
+                                        <td class="color_rougeViolet">Manque Commentaire</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['commentaire']}}</td>
+                                    {% endif %}                                   
+                                    <td><a href="{{path('djama_paiement_modification', {'numEleve': elevePaiement['numEleve'], 'numClasse': elevePaiement['numClasse']})}}">modification</a></td>
+                                    <td><a href="{{path('djama_paiement_suppression', {'numEleve': elevePaiement['numEleve'], 'numClasse': elevePaiement['numClasse']})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'false' %}
+                            {% else %} 
+                                <tr class="alt"> 
+                                    {% if elevePaiement['placePhoto'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Photo</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['placePhoto']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['sexe'] is null %}
+                                        <td style="background-color: #FF6347;">VIDE</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['sexe']}}</td>
+                                    {% endif %}                                    
+                                    {% if elevePaiement['nom'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nom</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['nom']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['prenom'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Prénom</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['prenom']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMens'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant M</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMens']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantAnn'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Annuel</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantAnn']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['totalPai'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Total P</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['totalPai']}}</td>
+                                    {% endif %}
+                                    <td>Reste à payer</td>
+                                    {% if elevePaiement['datePai1'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai1']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['octobre'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['octobre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantOct'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantOct']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai2'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai2']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['novembre'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['novembre']}}</td>
+                                    {% endif %}-
+                                    {% if elevePaiement['montantNov'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantNov']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai3'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai3']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['decembre'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['decembre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantDec'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantDec']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai4'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai4']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['janvier'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['janvier']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantJan'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantJan']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai5'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai5']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['fevrier'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['fevrier']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantFev'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                      <td>{{elevePaiement['montantFev']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai6'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai6']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['mars'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['mars']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMars'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMars']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai7'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai7']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['avril'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['avril']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantAv'] is null %}
+                                       <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantAv']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai8'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai8']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['mai'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['mai']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantMai'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantMai']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['datePai9'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['datePai9']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['juin'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['juin']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['montantJuin'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Montant</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['montantJuin']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['nomAppre'] is null %}
+                                        <td class="color_rougeViolet">Manque Appréciation</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['nomAppre']}}</td>
+                                    {% endif %}
+                                    {% if elevePaiement['commentaire'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Commentaire</td>
+                                    {% else %}
+                                        <td>{{elevePaiement['commentaire']}}</td>
+                                    {% endif %}                                  
+                                    <td><a href="{{path('djama_paiement_modification', {'numEleve': elevePaiement['numEleve'], 'numClasse': elevePaiement['numClasse']})}}">modification</a></td>
+                                    <td><a href="{{path('djama_paiement_suppression', {'numEleve': elevePaiement['numEleve'], 'numClasse': elevePaiement['numClasse']})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'true' %}
+                            {% endif %}
+                        </tbody>
+                    {% endfor %} 
+                </table>
+                <br/><br/>
+            </div>
+        {% endif %}
+    </body>
+</html>

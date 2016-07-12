@@ -1,0 +1,20 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{{title}}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_modification_commune', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            <p>
+                {{form_errors(form.nomCom)}}
+                {{form_label(form.nomCom, 'Nom Commune : ')}}
+                {{form_widget(form.nomCom)}}
+            </p>
+                {{form_rest(form)}}
+                <a href="{{path('djama_affichage_commune')}}">Annullez</a>
+            <input type="submit" value="Enregistrer"/>
+        </form>
+    </body>
+</html>
+{# empty Twig template #}

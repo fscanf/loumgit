@@ -1,0 +1,72 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}<title>{{title}}</title>{% endblock %}
+        
+        <meta http-equiv="\"Content-Type\"" content="\"text/html;charset=utf-8\"">
+        
+        {#{% stylesheets %}
+        <link rel="stylesheet" href="{{ asset('djama/DjamaBundle/bootstrap-3.3.4/css/bootstrap.min.css') }}" />#}
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
+    {#    {% endstylesheets  %}#}
+        {#
+        {% javascripts %} #}
+        <script src="{{ asset('//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js') }}"></script>
+        <script src="{{ asset('jQuery-table2excel/src/jquery.table2excel.js') }}"></script>
+    {#    {% endjavascripts %}
+        #}
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+            
+       
+        <h1>On djarama yo GS Kaloum</h1>
+        <br/>
+
+        <div>
+            <table id="customers">
+               <h4 style="align:center">{{titre_table}}</h4>
+                <thead>
+                    <tr id="table2excel">
+                        <th height="30px"> {{nomregle}} </th>
+                        <th height="30px"> {{periodedebut}} </th>              
+                        <th height="30px"> {{periodefin}} </th>
+                        <th height="30px"> Modification </th>
+                        <th height="30px"> Suppression </th>                            
+                    </tr>
+               </thead>
+                    {% set vrai = 'true' %} 
+                    {% for reglepaiement in lstReglePaiement %}  
+                        <tbody>
+                            {% if vrai is sameas ('true')  %} 
+                                <tr>
+                                    <td>{{reglepaiement['nomReglePai']}}</td>
+                                    <td>{{reglepaiement['periodeDebut']}}</td>
+                                    <td>{{reglepaiement['periodeFin']}}</td>
+                                    <td><a href="{{path('djama_paiement_modifandsuppreglepaiement', {'numReglePai': reglepaiement['numReglePai'], 'bool': 1})}}">modification</a></td>
+                                    <td><a href="{{path('djama_paiement_modifandsuppreglepaiement', {'numReglePai': reglepaiement['numReglePai'], 'bool': 2})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'false' %}
+                            {% else %} 
+                                <tr class="alt"> 
+                                    <td>{{reglepaiement['nomReglePai']}}</td>
+                                    <td>{{reglepaiement['periodeDebut']}}</td>
+                                    <td>{{reglepaiement['periodeFin']}}</td>
+                                    <td><a href="{{path('djama_paiement_modifandsuppreglepaiement', {'numReglePai': reglepaiement['numReglePai'], 'bool': 1})}}">modification</a></td>
+                                    <td><a href="{{path('djama_paiement_modifandsuppreglepaiement', {'numReglePai': reglepaiement['numReglePai'], 'bool': 2})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'true' %}
+                            {% endif %}
+                        </tbody>
+                    {% endfor %}
+                </table>
+                <br/><br/>
+        </div>
+    </body>
+</html>

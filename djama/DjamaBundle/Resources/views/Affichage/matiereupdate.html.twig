@@ -1,0 +1,26 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{{title}}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_modification_matiere', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            <p>
+                {{form_errors(form.codeMat)}}
+                {{form_label(form.codeMat, 'Code Matière : ')}}
+                {{form_widget(form.codeMat)}}
+
+                {{form_errors(form.nomMat)}}
+                {{form_label(form.nomMat, 'Nom Matière : ')}}
+                {{form_widget(form.nomMat)}}
+
+                {{form_errors(form.coeffMat)}}
+                {{form_label(form.coeffMat, 'Coéfficient : ')}}
+                {{form_widget(form.coeffMat)}}
+            </p>
+                {{form_rest(form)}}
+            <input type="submit" value="Enregistrer"/>
+        </form>
+    </body>
+</html>

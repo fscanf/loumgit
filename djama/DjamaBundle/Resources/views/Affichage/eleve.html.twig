@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}<title>{{title}}</title>{% endblock %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        {#{% stylesheets %}
+        <link rel="stylesheet" href="{{ asset('djama/DjamaBundle/bootstrap-3.3.4/css/bootstrap.min.css') }}" />#}
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
+    {#    {% endstylesheets  %}#}
+        {#
+        {% javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endjavascripts %}
+        #}
+    {# image :  <img src="{{ asset('images/logo.png') }}" /> 
+    
+    <img src="{{ asset('bundles/acmedemo/img/weather_icons/blizzard.gif') }}" />#}
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+            <h1>On djarama yo GS Kaloum</h1>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <th><a href="http://www.sfloumka.dev/app_dev.php/chargement"><button>???</button></a></th>
+                        <th><a href="http://www.sfloumka.dev/app_dev.php/accueil"><button action= "{{path('djama_affichage')}}" >???</button></a>      </th>           
+                    </tr>
+                </thead>
+            </table>                    
+            <br/>
+        
+        {% if partie is sameas(1) %}
+            <form action="{{path('djama_affichage_eleve')}}" method="post" {{form_enctype(form)}}
+                 {{form_errors(form.choix_classe)}}
+                 {{form_label(form.choix_classe, 'Sélection : ')}}
+                 {{form_widget(form.choix_classe)}}
+                {{form_rest(form)}}
+                <input type="submit" value="Validez"/>
+            </form>
+            
+        {% else %}
+            <div>
+                <table id="customers">
+                    <caption>{{titre_table}}</caption>
+                    <thead>
+                        <tr>
+                            <th height="30px"> {{photoId}} </th>
+                            <th height="30px"> {{sexe}} </th>              
+                            <th height="30px"> {{nom}} </th>               
+                            <th height="30px"> {{prenom}} </th>            
+                            <th height="30px"> {{dateN}} </th>             
+                            <th height="30px"> {{numTel}} </th>            
+                            <th height="30px"> {{adr}} </th>               
+                            <th height="30px"> {{com}} </th>               
+                            <th height="30px"> {{dateEn}} </th>         
+                            <th height="30px"> {{dateS}} </th>             
+                            <th height="30px"> {{pere}} </th>              
+                            <th height="30px"> {{pereProf}} </th>          
+                            <th height="30px"> {{telPere}} </th>           
+                            <th height="30px"> {{mere}} </th>              
+                            <th height="30px"> {{merePro}} </th>           
+                            <th height="30px"> {{telMer}} </th>            
+                            <th height="30px"> {{typeIns}} </th>           
+                            <th height="30px"> {{dateIns}} </th>           
+                            <th height="30px"> {{fraisIns}} </th>          
+                            <th height="30px"> {{cartePai}} </th>          
+                            <th height="30px"> {{bulletin}} </th>          
+                            <th height="30px"> {{extraitN}} </th>          
+                            <th height="30px"> {{livretS}} </th>           
+                            <th height="30px"> {{attestNiv}} </th>         
+                            <th height="30px"> {{nbPhoto}} </th>           
+                            <th height="30px"> {{moisOct}} </th>           
+                            <th height="30px"> {{montantOct}} </th>        
+                            <th height="30px"> {{datePaie}} </th>          
+                            <th height="30px"> {{moisMai}} </th>           
+                            <th height="30px"> {{montantMai}} </th>        
+                            <th height="30px"> {{dateMai}} </th>           
+                            <th height="30px"> {{moisJuin}} </th>          
+                            <th height="30px"> {{montantJuin}} </th>       
+                            <th height="30px"> {{dateJuin}} </th>          
+                            <th height="30px"> {{anneeS}} </th>            
+                            <th height="30px"> {{appre}} </th>             
+                            <th height="30px"> {{remarque}} </th>
+                            <th height="30px"> Modification </th>
+                            <th height="30px"> Suppression </th>                            
+                        </tr>
+                    </thead>
+                    {% set vrai = 'true' %} 
+                    {% for eleve in lstEleve %}  
+                        <tbody>
+                            {% if vrai is sameas ('true')  %} 
+                                <tr> 
+                                    {% if eleve['placePhoto'] is null %}
+                                        <td class="color_rougeViolet">Manque Photo</td>
+                                    {% else %}
+                                        <td><img src="{{asset(eleve['placePhoto']~eleve['nomPhoto'])}}" width="{{70}}px" height="{{70}}px" /></td>
+                                    {% endif %}
+                                    {% if eleve['sexe'] is null %}
+                                        <td class="color_rougeViolet">VIDE</td>
+                                    {% else %}
+                                        <td>{{eleve['sexe']}}</td>
+                                    {% endif %}                                    
+                                    {% if eleve['nom'] is null %}
+                                        <td class="color_rougeViolet">Manque Nom</td>
+                                    {% else %}
+                                        <td>{{eleve['nom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['prenom'] is null %}
+                                        <td class="color_rougeViolet">Manque Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['prenom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateN'] is null %}
+                                        <td class="color_rougeViolet">Manque Date Naissance</td>
+                                    {% else %}
+                                        <td>{{eleve['dateN']}}</td>
+                                    {% endif %}
+                                    {% if eleve['numTel'] is null %}
+                                        <td class="color_rougeViolet">Manque téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['numTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['adrElev'] is null %}
+                                        <td class="color_rougeViolet">Manque Adresse</td>
+                                    {% else %}
+                                        <td>{{eleve['adrElev']}}</td>
+                                    {% endif %}
+                                    {% if eleve['nomCom'] is null %}
+                                        <td class="color_rougeViolet">Manque Nom Commune</td>
+                                    {% else %}
+                                        <td>{{eleve['nomCom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateEntree'] is null %}
+                                        <td class="color_rougeViolet">Manque Date Entrée</td>
+                                    {% else %}
+                                        <td>{{eleve['dateEntree']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateSortie'] is null %}
+                                        <td class="color_rougeViolet">Manque Date Sortie</td>
+                                    {% else %}
+                                        <td>{{eleve['dateSortie']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pere'] is null %}
+                                        <td class="color_rougeViolet">Manque Nom et Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['pere']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pereProfession'] is null %}
+                                        <td class="color_rougeViolet">Manque Proffession</td>
+                                    {% else %}
+                                        <td>{{eleve['pereProfession']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pereTel'] is null %}
+                                        <td class="color_rougeViolet">Manque Téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['pereTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mere'] is null %}
+                                        <td class="color_rougeViolet">Manque Nom et Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['mere']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mereProfession'] is null %}
+                                        <td class="color_rougeViolet">Manque Proffession</td>
+                                    {% else %}
+                                        <td>{{eleve['mereProfession']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mereTel'] is null %}
+                                        <td class="color_rougeViolet">Manque Téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['mereTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['typeIns'] is null %}
+                                        <td class="color_rougeViolet">Manque Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['typeIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateIns'] is null %}
+                                        <td class="color_rougeViolet">Manque Date Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['dateIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['fraisIns'] is null %}
+                                        <td class="color_rougeViolet">Manque Frais Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['fraisIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['cartePai'] is null %}
+                                        <td class="color_rougeViolet">Manque Carte Paiement</td>
+                                    {% else %}
+                                        <td>{{eleve['cartePai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['bulletin'] is null %}
+                                        <td class="color_rougeViolet">Manque Bulletin</td>
+                                    {% else %}
+                                        <td>{{eleve['bulletin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['extraitNai'] is null %}
+                                        <td class="color_rougeViolet">Manque Extrait Naissance</td>
+                                    {% else %}
+                                      <td>{{eleve['extraitNai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['livretSco'] is null %}
+                                        <td class="color_rougeViolet">Manque Livret Scolaire</td>
+                                    {% else %}
+                                        <td>{{eleve['livretSco']}}</td>
+                                    {% endif %}
+                                    {% if eleve['attestationNiv'] is null %}
+                                        <td class="color_rougeViolet">Manque Attestation Niveau</td>
+                                    {% else %}
+                                        <td>{{eleve['attestationNiv']}}</td>
+                                    {% endif %}
+                                    {% if eleve['nbPhoto'] is null %}
+                                        <td class="color_rougeViolet">Manque Nombre Photo</td>
+                                    {% else %}
+                                        <td>{{eleve['nbPhoto']}}</td>
+                                    {% endif %}
+                                    {% if eleve['octobre'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['octobre']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantOct'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantOct']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai1'] is null %}
+                                       <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai1']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mai'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['mai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantMai'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantMai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai8'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai8']}}</td>
+                                    {% endif %}
+                                    {% if eleve['juin'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['juin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantJuin'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantJuin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai9'] is null %}
+                                        <td class="color_rougeViolet">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai9']}}</td>
+                                    {% endif %}
+                                    <td>{{eleve['nomAnnee']}}</td>
+                                    {% if eleve['nomAppre'] is null %}
+                                        <td class="color_rougeViolet">Manque Appréciation</td>
+                                    {% else %}
+                                        <td>{{eleve['nomAppre']}}</td>
+                                    {% endif %}
+                                    {% if eleve['remarque'] is null %}
+                                        <td class="color_rougeViolet">Manque Remarque</td>
+                                    {% else %}
+                                        <td>{{eleve['remarque']}}</td>
+                                    {% endif %}                                    
+                                    <td><a href="{{path('djama_modification_eleve', {'val_id': eleve['numEleve']})}}">modification</a></td>
+                                    <td><a href="{{path('djama_suppression_eleve', {'val_id': eleve['numEleve']})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'false' %}
+                            {% else %} 
+                                <tr class="alt"> 
+                                    {% if eleve['placePhoto'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Photo</td>
+                                    {% else %}
+                                        <td><img src="{{asset(eleve['placePhoto']~eleve['nomPhoto'])}}" width="{{70}}px" height="{{70}}px" /></td>
+                                    {% endif %}
+                                    {% if eleve['sexe'] is null %}
+                                        <td style="background-color: #FF6347;">VIDE</td>
+                                    {% else %}
+                                        <td>{{eleve['sexe']}}</td>
+                                    {% endif %}                                    
+                                    {% if eleve['nom'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nom</td>
+                                    {% else %}
+                                        <td>{{eleve['nom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['prenom'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['prenom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateN'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date Naissance</td>
+                                    {% else %}
+                                        <td>{{eleve['dateN']}}</td>
+                                    {% endif %}
+                                    {% if eleve['numTel'] is null %}
+                                        <td style="background-color: #FF6347;">Manque téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['numTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['adrElev'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Adresse</td>
+                                    {% else %}
+                                        <td>{{eleve['adrElev']}}</td>
+                                    {% endif %}
+                                    {% if eleve['nomCom'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nom Commune</td>
+                                    {% else %}
+                                        <td>{{eleve['nomCom']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateEntree'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date Entrée</td>
+                                    {% else %}
+                                        <td>{{eleve['dateEntree']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateSortie'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date Sortie</td>
+                                    {% else %}
+                                        <td>{{eleve['dateSortie']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pere'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nom et Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['pere']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pereProfession'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Proffession</td>
+                                    {% else %}
+                                        <td>{{eleve['pereProfession']}}</td>
+                                    {% endif %}
+                                    {% if eleve['pereTel'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['pereTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mere'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nom et Prénom</td>
+                                    {% else %}
+                                        <td>{{eleve['mere']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mereProfession'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Proffession</td>
+                                    {% else %}
+                                        <td>{{eleve['mereProfession']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mereTel'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Téléphone</td>
+                                    {% else %}
+                                        <td>{{eleve['mereTel']}}</td>
+                                    {% endif %}
+                                    {% if eleve['typeIns'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['typeIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['dateIns'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Date Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['dateIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['fraisIns'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Frais Inscription</td>
+                                    {% else %}
+                                        <td>{{eleve['fraisIns']}}</td>
+                                    {% endif %}
+                                    {% if eleve['cartePai'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Carte Paiement</td>
+                                    {% else %}
+                                        <td>{{eleve['cartePai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['bulletin'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Bulletin</td>
+                                    {% else %}
+                                        <td>{{eleve['bulletin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['extraitNai'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Extrait Naissance</td>
+                                    {% else %}
+                                      <td>{{eleve['extraitNai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['livretSco'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Livret Scolaire</td>
+                                    {% else %}
+                                        <td>{{eleve['livretSco']}}</td>
+                                    {% endif %}
+                                    {% if eleve['attestationNiv'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Attestation Niveau</td>
+                                    {% else %}
+                                        <td>{{eleve['attestationNiv']}}</td>
+                                    {% endif %}
+                                    {% if eleve['nbPhoto'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Nombre Photo</td>
+                                    {% else %}
+                                        <td>{{eleve['nbPhoto']}}</td>
+                                    {% endif %}
+                                    {% if eleve['octobre'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['octobre']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantOct'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantOct']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai1'] is null %}
+                                       <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai1']}}</td>
+                                    {% endif %}
+                                    {% if eleve['mai'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['mai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantMai'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantMai']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai8'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai8']}}</td>
+                                    {% endif %}
+                                    {% if eleve['juin'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['juin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['montantJuin'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['montantJuin']}}</td>
+                                    {% endif %}
+                                    {% if eleve['datePai9'] is null %}
+                                        <td style="background-color: #FF6347;">Non</td>
+                                    {% else %}
+                                        <td>{{eleve['datePai9']}}</td>
+                                    {% endif %}
+                                    <td>{{eleve['nomAnnee']}}</td>
+                                    {% if eleve['nomAppre'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Appréciation</td>
+                                    {% else %}
+                                        <td>{{eleve['nomAppre']}}</td>
+                                    {% endif %}
+                                    {% if eleve['remarque'] is null %}
+                                        <td style="background-color: #FF6347;">Manque Remarque</td>
+                                    {% else %}
+                                        <td>{{eleve['remarque']}}</td>
+                                    {% endif %}                                    
+                                    <td><a href="{{path('djama_modification_eleve', {'val_id': eleve['numEleve']})}}">modification</a></td>
+                                    <td><a href="{{path('djama_suppression_eleve', {'val_id': eleve['numEleve']})}}">suppression</a></td>
+                                </tr>
+                                {% set vrai = 'true' %}
+                            {% endif %}
+                        </tbody>
+                    {% endfor %} 
+                </table>
+                <br/><br/>
+            </div>
+        {% endif %}
+</html>

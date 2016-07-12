@@ -1,0 +1,55 @@
+<?php
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+namespace djama\DjamaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * Description of HistoriqueReglePaiementEntity
+ *
+ * @author Djama
+ * @ORM\Entity
+ * @ORM\Table(name="HistoriqueReglePaiement")
+ */
+class HistoriqueReglePaiementEntity 
+{
+    /**
+     * @ORM\Column(name="numReglePai", type="integer")
+     */
+    protected $numReglePai;
+    
+    /**
+     * @ORM\Column(name="nomReglePai", type="string", length=1000)
+     */
+    protected $nomReglePai;
+    
+    /**
+     * @ORM\Column(name="periodeDebut", type="string", length=20)
+     */
+    protected $periodeDebut;
+    
+    /**
+     * @ORM\Column(name="periodeFin", type="string", length=20)
+     */
+    protected $periodeFin;
+    
+    /**
+     * @ORM\Column(name="nomAnnee", type="string", length=20)
+     */
+    protected $nomAnnee;
+    
+    /**
+     * @ORM\Column(name="codeClasse", type="string", length=50)
+     */
+    protected $codeClasse;
+    
+    /**
+     * @ORM\Column(name="dateCreation", type="string", length=50)
+     */ 
+    protected $dateCreation;
+}

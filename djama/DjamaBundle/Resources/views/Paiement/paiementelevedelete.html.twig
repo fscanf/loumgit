@@ -1,0 +1,213 @@
+<html>
+    <head>
+        {% block title %}<title>{{title}}</title>{% endblock %}
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        {#{% stylesheets %}#}
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
+    {#    {% endstylesheets  %}#}
+        {#
+        {% javascripts %}
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        {% endjavascripts %}
+        #}
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+            
+       
+            <h1>On djarama yo GS Kaloum</h1>
+            <br/>
+            <h3>Voulez-vous vraiment supprimez cet élève et ces paiements ?</h3>
+            {{form_start(form, {'action': path('djama_paiement_suppression', {'numEleve': numEleve, 'numClasse': numClasse}), 'method':'POST'}) }}
+            {{form_errors(form)}}
+            <!--afficher ici la photo -->
+            <div class="elevediv">
+                {{form_errors(form.sexe)}}
+                {{form_label(form.sexe, 'Sexe :')}}
+                {{form_widget(form.sexe)}}
+                <br/>
+                
+                {{form_errors(form.nom)}}
+                {{form_label(form.nom, 'Nom :')}}
+                {{form_widget(form.nom)}}
+                <br/>
+                
+                {{form_errors(form.prenom)}}
+                {{form_label(form.prenom, 'Prénom :')}}
+                {{form_widget(form.prenom)}}
+                <br/>
+                
+                {{form_errors(form.montantMens)}}
+                {{form_label(form.montantMens, 'Montant Mensuel :')}}
+                {{form_widget(form.montantMens)}}
+                <br/>
+                
+                {{form_errors(form.montantAnn)}}
+                {{form_label(form.montantAnn, 'Montant Annuel :')}}
+                {{form_widget(form.montantAnn)}}
+                <br/>
+                  
+                {{form_errors(form.totalPai)}}
+                {{form_label(form.totalPai, 'Total Paiement :')}}
+                {{form_widget(form.totalPai)}}
+                <br/>
+                
+                {{form_errors(form.datePai1)}}
+                {{form_label(form.datePai1, 'Date Oct :')}}
+                {{form_widget(form.datePai1, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.octobre)}}
+                {{form_label(form.octobre, 'Octobre :')}}
+                {{form_widget(form.octobre)}}
+                <br/>
+                
+                {{form_errors(form.montantOct)}}
+                {{form_label(form.montantOct, 'Montant Oct :')}}
+                {{form_widget(form.montantOct)}}
+                <br/>
+                
+                {{form_errors(form.datePai2)}}
+                {{form_label(form.datePai2, 'Date Nov :')}}
+                {{form_widget(form.datePai2, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.novembre)}}
+                {{form_label(form.novembre, 'Novembre :')}}
+                {{form_widget(form.novembre)}}
+                <br/>
+                
+                {{form_errors(form.montantNov)}}
+                {{form_label(form.montantNov, 'Montant Nov :')}}
+                {{form_widget(form.montantNov)}}
+                <br/>
+                
+                {{form_errors(form.datePai3)}}
+                {{form_label(form.datePai3, 'Date Déc :')}}
+                {{form_widget(form.datePai3, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.decembre)}}
+                {{form_label(form.decembre, 'Décembre :')}}
+                {{form_widget(form.decembre)}}
+                <br/>
+                
+                {{form_errors(form.montantDec)}}
+                {{form_label(form.montantDec, 'Montant Dé :')}}
+                {{form_widget(form.montantDec)}}
+                <br/>
+                
+                {{form_errors(form.datePai4)}}
+                {{form_label(form.datePai4, 'Date Janv :')}}
+                {{form_widget(form.datePai4, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.janvier)}}
+                {{form_label(form.janvier, 'Janvier :')}}
+                {{form_widget(form.janvier)}}
+            </div>            
+            <div class="col-sm-offset-7">
+                {{form_errors(form.montantJan)}}
+                {{form_label(form.montantJan, 'Montant Janv :')}}
+                {{form_widget(form.montantJan)}}
+                <br/>
+                
+                {{form_errors(form.datePai5)}}
+                {{form_label(form.datePai5, 'Date Fév :')}}
+                {{form_widget(form.datePai5, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.fevrier)}}
+                {{form_label(form.fevrier, 'Février :')}}
+                {{form_widget(form.fevrier)}}
+                <br/>
+                
+                {{form_errors(form.montantFev)}}
+                {{form_label(form.montantFev, 'Montant Fév :')}}
+                {{form_widget(form.montantFev)}}
+                <br/>
+                
+                {{form_errors(form.datePai6)}}
+                {{form_label(form.datePai6, 'Date Mars :')}}
+                {{form_widget(form.datePai6, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.mars)}}
+                {{form_label(form.mars, 'Mars :')}}
+                {{form_widget(form.mars)}}
+                <br/>
+                
+                {{form_errors(form.montantMars)}}
+                {{form_label(form.montantMars, 'Montant Mars :')}}
+                {{form_widget(form.montantMars)}}
+                <br/>
+                
+                {{form_errors(form.datePai7)}}
+                {{form_label(form.datePai7, 'Date AVril :')}}
+                {{form_widget(form.datePai7, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.avril)}}
+                {{form_label(form.avril, 'Avril :')}}
+                {{form_widget(form.avril)}}
+                <br/>
+                
+                {{form_errors(form.montantAv)}}
+                {{form_label(form.montantAv, 'Montant Avril :')}}
+                {{form_widget(form.montantAv)}}
+                <br/>
+                
+                {{form_errors(form.datePai8)}}
+                {{form_label(form.datePai8, 'Date Mai :')}}
+                {{form_widget(form.datePai8, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.mai)}}
+                {{form_label(form.mai, 'Mai :')}}
+                {{form_widget(form.mai)}}
+                <br/>
+                
+                {{form_errors(form.montantMai)}}
+                {{form_label(form.montantMai, 'Montant Mai :')}}
+                {{form_widget(form.montantMai)}}
+                <br/>
+                
+                {{form_errors(form.datePai9)}}
+                {{form_label(form.datePai9, 'Date Juin :')}}
+                {{form_widget(form.datePai9, {'attr': {'placeholder': '2015-12-28 00:00:00'}})}}
+                <br/>
+                
+                {{form_errors(form.juin)}}
+                {{form_label(form.juin, 'Juin :')}}
+                {{form_widget(form.juin)}}
+                <br/>
+                
+                {{form_errors(form.montantJuin)}}
+                {{form_label(form.montantJuin, 'Montant Juin :')}}
+                {{form_widget(form.montantJuin)}}
+                <br/>
+                
+                {{form_errors(form.nomAppre)}}
+                {{form_label(form.nomAppre, 'Appréciation :')}}
+                {{form_widget(form.nomAppre)}}
+                <br/>
+                
+                {{form_errors(form.commentaire)}}
+                {{form_label(form.commentaire, 'Commentaire :')}}
+                {{form_widget(form.commentaire, {'attr': {'placeholder': 'Laissez un commentaire !'}})}}
+            </div>
+            {{form_rest(form)}}
+               <p>{{form_label(form.Supprimer)}}
+                   {{form_label(form.Annuller)}}</p>
+             
+            {{form_end(form)}}
+    </body>
+</html>

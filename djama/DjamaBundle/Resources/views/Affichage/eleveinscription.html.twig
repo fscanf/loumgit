@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} {{title}} {% endblock title %}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        
+        {#{% stylesheets %}#}
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+        
+        {{form_start(form, {'action':path('djama_affichage_inscription_eleve'), 'method': 'POST'})}}
+        {{form_errors(form)}}
+        
+                <div class="row">
+                <div class="col-sm-offset-9">
+                    {{form_errors(form.photo)}}
+                    {{form_label(form.photo, 'PHOTO : ')}}
+                    {{form_widget(form.photo)}}
+                </div>
+            </div>
+            <br/>
+            <div >
+                <div class="elevediv">
+                    {{form_errors(form.sexe)}}
+                    {{form_label(form.sexe, 'Sexe : ')}}
+                    {{form_widget(form.sexe)}}
+                    <br/>
+
+                    {{form_errors(form.nom)}}
+                    {{form_label(form.nom, 'Nom : ')}}
+                    {{form_widget(form.nom)}}
+                    <br/>
+
+                    {{form_errors(form.prenom)}}
+                    {{form_label(form.prenom, 'Prénom : ')}}
+                    {{form_widget(form.prenom)}}
+                    <br/>
+
+                    {{form_errors(form.dateN)}}
+                    {{form_label(form.dateN, 'Date Naissance : ')}}
+                    {{form_widget(form.dateN, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.numTel)}}
+                    {{form_label(form.numTel, 'Téléphone : ')}}
+                    {{form_widget(form.numTel, {'attr': {'placeholder' : '663-33-92-03'}})}}
+                    <br/>
+
+                    {{form_errors(form.adrElev)}}
+                    {{form_label(form.adrElev, 'Adresse : ')}}
+                    {{form_widget(form.adrElev)}}
+                    <br/>
+
+                    {{form_errors(form.nomCom)}}
+                    {{form_label(form.nomCom)}}
+                    {{form_widget(form.nomCom)}}
+                    <br/>
+                    
+                    {{form_errors(form.codeClasse)}}
+                    {{form_label(form.codeClasse)}}
+                    {{form_widget(form.codeClasse)}}
+                    <br/>
+                    
+                    {{form_errors(form.dateEntree)}}
+                    {{form_label(form.dateEntree, 'Date Entrée : ')}}
+                    {{form_widget(form.dateEntree, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.dateSortie)}}
+                    {{form_label(form.dateSortie, 'Date Sortie : ')}}
+                    {{form_widget(form.dateSortie, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.pere)}}
+                    {{form_label(form.pere, 'Père : ')}}
+                    {{form_widget(form.pere)}}
+                    <br/>
+
+                    {{form_errors(form.pereProfession)}}
+                    {{form_label(form.pereProfession, 'Profession Père : ')}}
+                    {{form_widget(form.pereProfession)}}
+                    <br/>
+
+                    {{form_errors(form.pereTel)}}
+                    {{form_label(form.pereTel, 'Téléphone Père : ')}}
+                    {{form_widget(form.pereTel, {'attr': {'placeholder' : '663-33-92-03'}})}}
+                    <br/>
+
+                    {{form_errors(form.mere)}}
+                    {{form_label(form.mere, 'Mère : ')}}
+                    {{form_widget(form.mere)}}
+                    <br/>
+
+                    {{form_errors(form.mereProfession)}}
+                    {{form_label(form.mereProfession,'Profession Mère : ')}}
+                    {{form_widget(form.mereProfession)}}
+                    <br/>
+
+                    {{form_errors(form.mereTel)}}
+                    {{form_label(form.mereTel, 'Téléphone Mère : ')}}
+                    {{form_widget(form.mereTel, {'attr': {'placeholder' : '663-33-92-03'}})}}
+                    <br/>
+
+                    {{form_errors(form.typeIns)}}
+                    {{form_label(form.typeIns, 'Type Inscription : ')}}
+                    {{form_widget(form.typeIns)}}
+                    <br/>
+
+                    {{form_errors(form.dateIns)}}
+                    {{form_label(form.dateIns, 'Date Inscription : ')}}
+                    {{form_widget(form.dateIns, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.fraisIns)}}
+                    {{form_label(form.fraisIns, 'Frais Inscription : ')}}
+                    {{form_widget(form.fraisIns)}}
+                    <br/>
+                    
+                    {{form_errors(form.badge)}}
+                    {{form_label(form.badge, 'Badge : ')}}
+                    {{form_widget(form.badge)}}
+                    
+                </div>
+                <div class="col-sm-offset-7">                  
+                    {{form_errors(form.cartePai)}}
+                    {{form_label(form.cartePai, 'Carte Paiement : ')}}
+                    {{form_widget(form.cartePai)}}
+                    <br/>
+                                        
+                    {{form_errors(form.bulletin)}}
+                    {{form_label(form.bulletin, 'Bulletin : ')}}
+                    {{form_widget(form.bulletin)}}
+                    <br/>
+
+                    {{form_errors(form.extraitNai)}}
+                    {{form_label(form.extraitNai, 'Extrait Naissance : ' )}}
+                    {{form_widget(form.extraitNai)}}
+                    <br/>
+
+                    {{form_errors(form.livretSco)}}
+                    {{form_label(form.livretSco, 'Livrait Scolaire : ')}}
+                    {{form_widget(form.livretSco)}}
+                    <br/>
+
+                    {{form_errors(form.attestationNiv)}}
+                    {{form_label(form.attestationNiv, 'Attestation Niveau : ')}}
+                    {{form_widget(form.attestationNiv)}}
+                    <br/>
+
+                    {{form_errors(form.nbPhoto)}}
+                    {{form_label(form.nbPhoto, 'Nombre Photo : ')}}
+                    {{form_widget(form.nbPhoto)}}
+                    <br/>
+
+                    {{form_errors(form.octobre)}}
+                    {{form_label(form.octobre, 'Octobre : ')}}
+                    {{form_widget(form.octobre)}}
+                    <br/>
+
+                    {{form_errors(form.montantOct)}}
+                    {{form_label(form.montantOct, 'Montant : ')}}
+                    {{form_widget(form.montantOct)}}
+                    <br/>
+
+                    {{form_errors(form.datePai1)}}
+                    {{form_label(form.datePai1, 'Date Paiement : ')}}
+                    {{form_widget(form.datePai1, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.mai)}}
+                    {{form_label(form.mai, 'Mai : ')}}
+                    {{form_widget(form.mai)}}
+                    <br/>
+
+                    {{form_errors(form.montantMai)}}
+                    {{form_label(form.montantMai, 'Montant Mai : ')}}
+                    {{form_widget(form.montantMai)}}
+                    <br/>
+
+                    {{form_errors(form.datePai8)}}
+                    {{form_label(form.datePai8, 'Date Paiement : ' )}}
+                    {{form_widget(form.datePai8, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.juin)}}
+                    {{form_label(form.juin, 'Juin : ')}}
+                    {{form_widget(form.juin)}}
+                    <br/>
+
+                    {{form_errors(form.montantJuin)}}
+                    {{form_label(form.montantJuin, 'Montant Juin : ')}}
+                    {{form_widget(form.montantJuin)}}
+                    <br/>
+
+                    {{form_errors(form.datePai9)}}
+                    {{form_label(form.datePai9, 'Date Paiement : ')}}
+                    {{form_widget(form.datePai9, {'attr': {'placeholder': '2015-12-28'}})}}
+                    <br/>
+
+                    {{form_errors(form.nomAnnee)}}
+                    {{form_label(form.nomAnnee)}}
+                    {{form_widget(form.nomAnnee)}}
+                    <br/>
+
+                    {{form_errors(form.nomAppre)}}
+                    {{form_label(form.nomAppre)}}
+                    {{form_widget(form.nomAppre)}}
+                    <br/>
+
+                    {{form_errors(form.remarque)}}
+                    {{form_label(form.remarque) }}
+                    {{form_widget(form.remarque, {'attr': {'placeholder ': 'Laissez un commentaire'}})}}
+                </div>
+            </div>
+        
+        {{form_rest(form)}}
+            <input type="submit"    value="Inscris"/>
+        {{form_end(form)}}
+        
+    </body>
+</html>

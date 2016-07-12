@@ -1,0 +1,119 @@
+# www.sfloumka.dev
+djama_accueil:
+    path:     /accueil
+    defaults: { _controller: djamaDjamaBundle:Accueil:pageAccueil }
+    
+djama_chargement:
+    path:     /chargement
+    defaults: { _controller: djamaDjamaBundle:UploadFile:chargerFichier }
+
+djama_affichage:
+    path:     /affichagedonnees
+    defaults: { _controller: djamaDjamaBundle:Affichage:afficheData }
+    
+djama_affichage_matiere:
+    path:     /affichagematiere
+    defaults: { _controller: djamaDjamaBundle:Affichage:matiere }
+   
+djama_modification_matiere:
+    path:     /modification/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:matiereUpdate }
+    
+djama_suppression_matiere:
+    path:     /suppression/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:matiereDelete }
+    
+djama_affichage_commune:
+    path:     /affichagecommune
+    defaults: { _controller: djamaDjamaBundle:Affichage:commune }
+    
+djama_modification_commune:
+    path:     /modificationcommune/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:communeUpdate }
+    
+djama_suppression_commune:
+    path:     /suppressioncommune/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:communeDelete }
+
+djama_affichage_classe:
+    path:     /affichageclasse
+    defaults: { _controller: djamaDjamaBundle:Affichage:classe }
+    
+djama_modification_classe:
+    path:     /modificationclasse/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:classeUpdate }
+    
+djama_suppression_classe:
+    path:     /suppressionclasse/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:classeDelete }
+    
+djama_affichage_eleve:
+    path:     /eleveinscris
+    defaults: { _controller: djamaDjamaBundle:Affichage:eleve }
+    
+djama_modification_eleve:
+    path:     /modificationeleve/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:eleveUpdate }
+    
+djama_suppression_eleve:
+    path:     /suppressioneleve/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Affichage:eleveDelete }
+
+djama_affichage_inscription_eleve:
+    path:     /inscription
+    defaults: { _controller: djamaDjamaBundle:Affichage:eleveInscription }
+
+djama_paiement_eleve:
+    path:     /paiement
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementEleve }
+
+djama_paiement_modification:
+    path:     /paiementmodif/{numEleve}/{numClasse}
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementEleveUpdate }
+
+djama_paiement_suppression:
+    path:     /paiementsupp/{numEleve}/{numClasse}
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementEleveDelete }
+    
+djama_paiement_personnel:
+    path:     /paiementpersonnel
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementPersonnel }
+
+djama_paiement_modifpersonnel:
+    path:     /paiementmodifpersonnel/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementPersonnelUpdate}
+
+djama_paiement_supppersonnel:
+    path:     /paiementsupp/{val_id}
+    defaults: { _controller: djamaDjamaBundle:Paiement:paiementPersonnelDelete}
+
+djama_paiement_saisiereglepaiement:
+    path:     /saisiereglepaiement
+    defaults: { _controller: djamaDjamaBundle:Paiement:saisieReglePaiement}
+
+djama_paiement_reglepaiemet:
+    path:     /affichereglepaiement
+    defaults: { _controller: djamaDjamaBundle:Paiement:afficheReglePaiement}
+    
+djama_paiement_modifandsuppreglepaiement:
+    path:     /modifandsuppreglepaiement/{numReglePai}/{bool}
+    defaults: { _controller: djamaDjamaBundle:Paiement:reglePaiementModifSupp}
+    
+djama_paiement_etatpaiement:
+    path:     /etatpaiement
+    defaults: { _controller: djamaDjamaBundle:Paiement:etatPaiement}
+
+#djama_photo:
+#    path:     /photo
+#    defaults: { _controller: djamaDjamaBundle:UploadFile:photo }
+
+
+    
+djama_insertion:
+    path:     /insertion
+    defaults: { _controller: djamaDjamaBundle:UploadFile:show }
+
+
+djama_djama_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: djamaDjamaBundle:Default:index }

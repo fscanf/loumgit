@@ -1,0 +1,29 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{{title}}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_modification_classe', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            {{form_errors(form)}}
+            <p>
+                {{form_errors(form.codeClasse)}}
+                {{form_label(form.codeClasse, 'Code Matière : ')}}
+                {{form_widget(form.codeClasse)}}
+
+                {{form_errors(form.nomClasse)}}
+                {{form_label(form.nomClasse, 'Nom Matière : ')}}
+                {{form_widget(form.nomClasse)}}
+
+                {{form_errors(form.effectifs)}}
+                {{form_label(form.effectifs, 'Coéfficient : ')}}
+                {{form_widget(form.effectifs)}}
+            </p>
+                {{form_rest(form)}}
+                <a href="{{path('djama_affichage_classe')}}">Annullez</a>
+            <input type="submit" value="Enregistrer"/>
+        </form>
+    </body>
+</html>
+{# empty Twig template #}

@@ -1,0 +1,30 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_suppression_classe', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            <h3>Voulez-vous vraiment supprimer</h3>
+            <p>
+                {{form_errors(form.codeClasse)}}
+                {{form_label(form.codeClasse, 'le code ')}}
+                {{form_widget(form.codeClasse)}}
+                
+                {{form_errors(form.nomClasse)}}
+                {{form_label(form.nomClasse, ', le nom ')}}
+                {{form_widget(form.nomClasse)}}
+                
+                {{form_errors(form.effectifs)}}
+                {{form_label(form.effectifs, ' et l\'effectifs ')}}
+                {{form_widget(form.effectifs)}} pour cette classe ?
+            </p>
+            {{form_rest(form)}}
+            <a href="{{path('djama_affichage_classe')}}">Annullez</a>
+            <input type="submit" value="supprimez"/>
+        </form>
+        
+    </body>
+</html>
+{# empty Twig template #}

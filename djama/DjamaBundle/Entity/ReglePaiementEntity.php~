@@ -1,0 +1,37 @@
+<?php
+
+namespace djama\DjamaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+/**
+ * Description of ReglePaiement
+ *
+ * @author Djama
+ * @ORM\Entity
+ * @ORM\Table(name="ReglePaiement")
+ */
+class ReglePaiementEntity 
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="numReglePai", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $numReglePai;
+    
+    /**
+     * @ORM\Column(name="nomReglePai", type="string", length=1000)
+     */
+    protected $nomReglePai;
+    
+    /**
+     * @ORM\Column(name="periodeDebut", type="string", length=20)
+     */
+    protected $periodeDebut;
+    
+    /**
+     * @ORM\Column(name="periodeFin", type="string", length=20)
+     */
+    protected $periodeFin;
+    
+}

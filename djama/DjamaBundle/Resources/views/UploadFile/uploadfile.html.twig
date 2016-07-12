@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}
+            <title>{{title}}</title>
+        {% endblock %}
+        
+        <style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#customers td, #customers th {
+    font-size: 1em;
+    border: 1px solid #98bf21;
+    padding: 3px 7px 2px 7px;
+}
+
+#customers th {
+    font-size: 1.1em;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    background-color: #A7C942;
+    color: #ffffff;
+}
+
+#customers tr.alt td {
+    background-color: #EAF2D3;
+}
+</style>
+    </head>
+    <body>
+        {% block date_du_jour %}
+            <em>{{dateDuJour|convert_encoding('UTF-8', 'ISO-8859-1')}}</em>
+        {% endblock %}
+        {% block anneScolaire %}
+            <em>Année Scolaire : {{anneeScolaire}}</em>
+        {% endblock %}
+        {% if partie is sameas(1) %}
+            <p><em>loggo</em></p>
+            <form action="{{path('djama_chargement')}}" method="post" {{form_enctype(form)}}>
+                <p>
+                <h3>Téléchargement du fichier</h3>
+                 {{form_errors(form.fichier)}}
+                 {{form_label(form.fichier, 'Fichier')}}
+                 {{form_widget(form.fichier, {'attr':{'placeholder': 'Fichier' }}) }}
+
+                 {{form_errors(form.num_classeur)}}
+                 {{form_label(form.num_classeur, 'N° Classeur')}}
+                 {{form_widget(form.num_classeur, {'attr':{'placeholder': 'Entre 1 à 10' }}) }}
+
+                 {{form_errors(form.tous_les_classeurs)}}
+                 {{form_label(form.tous_les_classeurs, 'Tous Classeurs')}}
+                 {{form_widget(form.tous_les_classeurs) }}
+
+                 <input type="submit"    name="form1" value="Charger"/>
+                </p>
+                <p>
+                <h3>Type notes évaluations</h3>
+                 {{form_errors(form.notes)}}
+                 {{form_label(form.notes, 'Notes')}}
+                 {{form_widget(form.notes , {'attr':{'placeholder': 'notes'}}) }}
+
+                 {{form_errors(form.type_note)}}
+                 {{form_label(form.type_note, 'Type notes')}}
+                 {{form_widget(form.type_note , {'attr':{'placeholder': 'type_note'}}) }} 
+                </p>
+                <p>
+                <h2>Liste des classes<h2>
+                <h3>Maternnelle</h3>
+                 {{form_errors(form.maternelle_p)}}
+                 {{form_label(form.maternelle_p, 'Maternelle-P')}}
+                 {{form_widget(form.maternelle_p, {'attr':{'placeholder': 'Maternelle-P'}}) }}
+
+                 {{form_errors(form.maternelle_m)}}
+                 {{form_label(form.maternelle_m, 'Maternelle-M')}}
+                 {{form_widget(form.maternelle_m , {'attr':{'placeholder': 'Maternelle-M'}}) }}
+
+                 {{form_errors(form.maternelle_g)}}
+                 {{form_label(form.maternelle_g, 'Maternelle-G')}}
+                 {{form_widget(form.maternelle_g , {'attr':{'placeholder': 'Maternelle-G'}}) }}
+
+                 {{form_errors(form.maternelle_pmg)}}
+                 {{form_label(form.maternelle_pmg, 'Maternelle-P.M.G')}}
+                 {{form_widget(form.maternelle_pmg , {'attr':{'placeholder': 'Maternelle-PMG'}}) }}
+                </p>
+                <p>
+                <h3>Primaire</h3>
+                 {{form_errors(form.premier_a)}}
+                 {{form_label(form.premier_a, '1ère A')}}
+                 {{form_widget(form.premier_a , {'attr':{'placeholder': 'premier_a'}}) }}
+
+                 {{form_errors(form.deuxieme_a)}}
+                 {{form_label(form.deuxieme_a, '2em A')}}
+                 {{form_widget(form.deuxieme_a , {'attr':{'placeholder': 'deuxieme_a'}}) }}
+
+                 {{form_errors(form.troisieme_a)}}
+                 {{form_label(form.troisieme_a, '3em A')}}
+                 {{form_widget(form.troisieme_a , {'attr':{'placeholder': 'troisieme_a'}}) }}
+
+                 {{form_errors(form.quatrieme_a)}}
+                 {{form_label(form.quatrieme_a, '4em A')}}
+                 {{form_widget(form.quatrieme_a , {'attr':{'placeholder': 'quatrieme_a'}}) }}
+
+                 {{form_errors(form.cinquieme_a)}}
+                 {{form_label(form.cinquieme_a, '5em A')}}
+                 {{form_widget(form.cinquieme_a , {'attr':{'placeholder': 'cinquieme_a'}}) }}
+
+                 {{form_errors(form.sixieme_a)}}
+                 {{form_label(form.sixieme_a, '6em A')}}
+                 {{form_widget(form.sixieme_a , {'attr':{'placeholder': 'sixieme_a'}}) }}
+
+                 {{form_errors(form.primaire)}}
+                 {{form_label(form.primaire, 'Primaire')}}
+                 {{form_widget(form.primaire , {'attr':{'placeholder': 'primaire'}}) }}
+                </p>
+                <p>
+                <h3>Collège</h3>
+                 {{form_errors(form.septieme_a)}}
+                 {{form_label(form.septieme_a, '7em A')}}
+                 {{form_widget(form.septieme_a , {'attr':{'placeholder': 'septieme_a'}}) }}
+
+                 {{form_errors(form.huitieme_a)}}
+                 {{form_label(form.huitieme_a, '8em A')}}
+                 {{form_widget(form.huitieme_a , {'attr':{'placeholder': 'huitieme_a'}}) }}
+
+                 {{form_errors(form.neufvieme_a)}}
+                 {{form_label(form.neufvieme_a, '9em A')}}
+                 {{form_widget(form.neufvieme_a , {'attr':{'placeholder': 'neufvieme_a'}}) }}
+
+                 {{form_errors(form.dixieme_a)}}
+                 {{form_label(form.dixieme_a, '10em A')}}
+                 {{form_widget(form.dixieme_a , {'attr':{'placeholder': 'dixieme_a'}}) }}
+
+                 {{form_errors(form.college)}}
+                 {{form_label(form.college, 'Collège')}}
+                 {{form_widget(form.college , {'attr':{'placeholder': 'college'}}) }}
+                </p>
+                <p>
+                <h3>Lycée</h3>
+                 {{form_errors(form.onsieme_a)}}
+                 {{form_label(form.onsieme_a, '11em A')}}
+                 {{form_widget(form.onsieme_a , {'attr':{'placeholder': 'onsieme_a'}}) }}
+
+                 {{form_errors(form.dousieme_a)}}
+                 {{form_label(form.dousieme_a, '12em A')}}
+                 {{form_widget(form.dousieme_a , {'attr':{'placeholder': 'dousieme_a'}}) }}
+
+                 {{form_errors(form.terminale_a)}}
+                 {{form_label(form.terminale_a, 'Terminale')}}
+                 {{form_widget(form.terminale_a , {'attr':{'placeholder': 'terminale_a'}}) }}
+
+                 {{form_errors(form.lycee)}}
+                 {{form_label(form.lycee, 'Lycée')}}
+                 {{form_widget(form.lycee , {'attr':{'placeholder': 'lycee'}}) }}
+                </p>
+                <p>
+                    <h3>Chargement des fichiers de bases</h3>
+                 {{form_errors(form.communes)}}
+                 {{form_label(form.communes, 'Communes')}}
+                 {{form_widget(form.communes , {'attr':{'placeholder': 'communes'}}) }}
+
+                 {{form_errors(form.classes)}}
+                 {{form_label(form.classes, 'Classes')}}
+                 {{form_widget(form.classes , {'attr':{'placeholder': 'classes'}}) }}
+
+                 {{form_errors(form.matieres)}}
+                 {{form_label(form.matieres, 'Matieres')}}
+                 {{form_widget(form.matieres , {'attr':{'placeholder': 'matieres'}}) }}
+
+                 {{form_errors(form.appreciation)}}
+                 {{form_label(form.appreciation, 'Appreciations')}}
+                 {{form_widget(form.appreciation , {'attr':{'placeholder': 'appreciation'}}) }}
+
+                 {{form_errors(form.direction)}}
+                 {{form_label(form.direction, 'Direction')}}
+                 {{form_widget(form.direction , {'attr':{'placeholder': 'direction'}}) }}
+
+                 {{form_errors(form.personnels)}}
+                 {{form_label(form.personnels, 'Personnels')}}
+                 {{form_widget(form.personnels , {'attr':{'placeholder': 'personnels'}}) }}
+
+                </p>
+
+                 {{form_rest(form)}}
+            </form>
+        {% else %}
+            <h1>On djarama yo GS Kaloum</h1>
+            <table style="width:100%">
+                <thead>
+                    <tr>
+                        <th><a href="http://www.sfloumka.dev/app_dev.php/chargement"><button>Annueller</button></a></th>
+                        <th><a href="http://www.sfloumka.dev/app_dev.php/accueil"><button action= "{{path('djama_affichage')}}" >Sauvegardez</button></a>      </th>           
+                    </tr>
+                </thead>
+            </table>                    
+            <br/>
+            <div>
+                {% for indice, titre in arrayClasseurTitre  %}
+                    {% if arrayChamps[titre] is defined %}
+                       <table id="customers">
+                            <caption> {{titre}} </caption>
+                            <thead>
+                                <tr>
+                                    {% for champ in arrayChamps[titre] %}
+                                       <th height="30px"> {{champ}} </th>
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for datas in arrayData %}
+                                    {% set vrai = 'true' %} 
+                                    {% for data in datas %}
+                                        {% if vrai is sameas ('true')  %} 
+                                            <tr>
+                                                {% for da in data %} 
+                                                    {% if da is not defined %}
+                                                        <td> {{Vide}} </td>
+                                                    {% else %} 
+                                                        <td> {{da}} </td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                            {% set vrai = 'false' %}
+                                        {% else %} 
+                                            <tr class="alt"> 
+                                                {% for da in data %}
+                                                    {% if da is defined %}
+                                                            <td > {{da}} </td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </tr>
+                                            {% set vrai = 'true' %}
+                                        {% endif %}
+                                    {% endfor %} 
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                            <br/><br/><br/>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </body>
+</html>

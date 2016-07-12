@@ -1,0 +1,29 @@
+{# empty Twig template #}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+    </head>
+    <body>
+        <form action="{{path('djama_suppression_matiere', {'val_id': val_id})}}" method="post" {{form_enctype(form)}}>
+            <h3>Voulez-vous vraiment supprimer</h3>
+            <p>
+                {{form_errors(form.codeMat)}}
+                {{form_label(form.codeMat, 'le de code de la matière')}}
+                {{form_widget(form.codeMat)}}
+                
+                {{form_errors(form.nomMat)}}
+                {{form_label(form.nomMat, ', le nomd de la matière')}}
+                {{form_widget(form.nomMat)}}
+                
+                {{form_errors(form.coeffMat)}}
+                {{form_label(form.coeffMat, ' et le coefficient ')}}
+                {{form_widget(form.coeffMat)}} pour cette classe ?
+            </p>
+            {{form_rest(form)}}
+            <a href="{{path('djama_affichage_matiere')}}">Annullez</a>
+            <input type="submit" value="supprimez"/>
+        </form>
+        
+    </body>
+</html>
