@@ -12,21 +12,21 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EleveInsReinsEntity {
    
-    public function EleveInsReinsEntity($elevInsReins = array())
+    public function EleveInsReinsEntity($elevInsReins)
     {
-        $this->numAppre     =   $elevInsReins['numAppre'];
-        $this->numCom       =   $elevInsReins['numCom'];
-        $this->adrElev      =   $elevInsReins['adrElev'];
-        $this->numAnnee     =   $elevInsReins['numAnnee'];
-        $this->numClasse    =   $elevInsReins['numClasse'];
-        $this->numEleve     =   $elevInsReins['numEleve'];
-        $this->typeIns      =   $elevInsReins['typeIns'];
-        $this->dateIns      =   $elevInsReins['dateIns'];
-        $this->fraisIns     =   $elevInsReins['fraisIns'];
-        $this->nbPhoto      =   $elevInsReins['nbPhoto'];
-        $this->cartePai     =   $elevInsReins['cartePai'];
-        $this->badge        =   $elevInsReins['badge'];
-        $this->bulletin     =   $elevInsReins['bulletin'];
+        $this->numAppre     =   $elevInsReins->numAppre;
+        $this->numCom       =   $elevInsReins->numCom;
+        $this->adrElev      =   $elevInsReins->adrElev;
+        $this->numAnnee     =   $elevInsReins->numAnnee;
+        $this->numClasse    =   $elevInsReins->numClasse;
+        $this->numEleve     =   $elevInsReins->numEleve;
+        $this->typeIns      =   $elevInsReins->typeIns;
+        $this->dateIns      =   $elevInsReins->dateIns;
+        $this->fraisIns     =   $elevInsReins->fraisIns;
+        $this->nbPhoto      =   $elevInsReins->nbPhoto;
+        $this->cartePai     =   $elevInsReins->cartePai;
+        $this->badge        =   $elevInsReins->badge;
+        $this->bulletin     =   $elevInsReins->bulletin;
     }
     /**
      * @ORM\Column(name="numAppre", type="integer")

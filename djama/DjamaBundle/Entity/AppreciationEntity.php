@@ -23,6 +23,10 @@ class AppreciationEntity {
      */
     protected   $nomAppre;
 
+    public function AppreciationEntity($appreciation) {
+        $this->numAppre = $appreciation->numAppre;
+        $this->nomAppre = $appreciation->nomAppre;
+    }
     /**
      * Get numAppre
      *

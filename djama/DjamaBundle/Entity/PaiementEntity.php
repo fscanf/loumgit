@@ -12,39 +12,39 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PaiementEntity {
    
-    public function PaiementEntity($paiement = array())
+    public function PaiementEntity($paiement)
     {
-        $this->numPai       =   $paiement['numPai'];
-        $this->montantMens  =   $paiement['montantMens'];
-        $this->montantAnn   =   $paiement['montantAnn'];
-        $this->totalPai     =   $paiement['totalPai'];
-        $this->datePai1     =   $paiement['datePai1'];
-        $this->octobre      =   $paiement['octobre'];
-        $this->montantOct   =   $paiement['montantOct'];
-        $this->datePai2     =   $paiement['datePai2'];
-        $this->novembre     =   $paiement['novembre'];
-        $this->montantNov   =   $paiement['montantNov'];
-        $this->datePai3     =   $paiement['datePai3'];
-        $this->decembre     =   $paiement['decembre'];
-        $this->montantDec   =   $paiement['montantDec'];
-        $this->datePai4     =   $paiement['datePai4'];
-        $this->janvier      =   $paiement['janvier'];
-        $this->montantJan   =   $paiement['montantJan'];
-        $this->datePai5     =   $paiement['datePai5'];
-        $this->fevrier      =   $paiement['fevrier'];
-        $this->montantFev   =   $paiement['montantFev'];
-        $this->datePai6     =   $paiement['datePai6'];
-        $this->mars         =   $paiement['mars'];
-        $this->montantMars  =   $paiement['montantMars'];
-        $this->datePai7     =   $paiement['datePai7'];
-        $this->avril        =   $paiement['avril'];
-        $this->montantAv    =   $paiement['montantAv'];
-        $this->datePai8     =   $paiement['datePai8'];
-        $this->mai          =   $paiement['mai'];
-        $this->montantMai   =   $paiement['montantMai'];
-        $this->datePai9     =   $paiement['datePai9'];
-        $this->juin         =   $paiement['juin'];
-        $this->montantJuin  =   $paiement['montantJuin'];
+        $this->numPai       =   $paiement->numPai;
+        $this->montantMens  =   isset($paiement->montantMens) == true ? $paiement->montantMens : null;
+        $this->montantAnn   =   isset($paiement->montantAnn) == true ? $paiement->montantAnn : null;
+        $this->totalPai     =   isset($paiement->totalPai) == true ? $paiement->totalPai : null;
+        $this->datePai1     =   isset($paiement->datePai1)== true ? $paiement->datePai1 : null;
+        $this->octobre      =   isset($paiement->octobre)== true ? $paiement->octobre : null;
+        $this->montantOct   =   isset($paiement->montantOct)== true ? $paiement->montantOct : null;
+        $this->datePai2     =   isset($paiement->datePai2)== true ? $paiement->datePai2 : null;
+        $this->novembre     =   isset($paiement->novembre)== true ? $paiement->novembre : null;
+        $this->montantNov   =   isset($paiement->montantNov)== true ? $paiement->montantNov : null;
+        $this->datePai3     =   isset($paiement->datePai3)== true ? $paiement->datePai3 : null;
+        $this->decembre     =   isset($paiement->decembre)== true ? $paiement->decembre : null;
+        $this->montantDec   =   isset($paiement->montantDec)== true ? $paiement->montantDec : null;
+        $this->datePai4     =   isset($paiement->datePai4)== true ? $paiement->datePai4 : null;
+        $this->janvier      =   isset($paiement->janvier)== true ? $paiement->janvier : null;
+        $this->montantJan   =   isset($paiement->montantJan)== true ? $paiement->montantJan : null;
+        $this->datePai5     =   isset($paiement->datePai5)== true ? $paiement->datePai5 : null;
+        $this->fevrier      =   isset($paiement->fevrier)== true ? $paiement->fevrier : null;
+        $this->montantFev   =   isset($paiement->montantFev)== true ? $paiement->montantFev : null;
+        $this->datePai6     =   isset($paiement->datePai6)== true ? $paiement->datePai6 : null;
+        $this->mars         =   isset($paiement->mars)== true ? $paiement->mars : null;
+        $this->montantMars  =   isset($paiement->montantMars)== true ? $paiement->montantMars : null;
+        $this->datePai7     =   isset($paiement->datePai7)== true ? $paiement->datePai7 : null;
+        $this->avril        =   isset($paiement->avril)== true ? $paiement->avril : null;
+        $this->montantAv    =   isset($paiement->montantAv)== true ? $paiement->montantAv : null;
+        $this->datePai8     =   isset($paiement->datePai8)== true ? $paiement->datePai8 : null;
+        $this->mai          =   isset($paiement->mai)== true ? $paiement->mai : null;
+        $this->montantMai   =   isset($paiement->montantMai)== true ? $paiement->montantMai : null;
+        $this->datePai9     =   isset($paiement->datePai9)== true ? $paiement->datePai9 : null;
+        $this->juin         =   isset($paiement->juin)== true ? $paiement->juin : null;
+        $this->montantJuin  =   isset($paiement->montantJuin)== true ? $paiement->montantJuin : null;
     }
     /**
      * @ORM\Id

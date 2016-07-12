@@ -22,6 +22,7 @@ use djama\DjamaBundle\Entity\PhotoEleveEntity;
 use djama\DjamaBundle\Entity\PaiementEntity;
 use djama\DjamaBundle\Entity\EleveInscrisPaiementEntity;
 use djama\DjamaBundle\Entity\MatiereEntity;
+use djama\DjamaBundle\Entity\AppreciationEntity;
 
 /**
  * Description of AffichageController
@@ -567,64 +568,71 @@ class AffichageController extends Controller
         
         if ($form->isValid())
         {
-            $dataForm = $form->getData();
-          
-            $eleve = new EleveInscrisEntity();
-            $eleve->EleveInscrisEntity($dataForm);
+            $formData = $form->getData();
+                     
             $em1 = $this->getDoctrine()->getManager(); 
-            $em1->persist($eleve);
+    
+            $eleve = $em1->getRepository('djamaDjamaBundle:EleveInscrisEntity')->find($formData->numEleve);
+            $eleve->EleveInscrisEntity($formData);
+                     
+            $commune = $em1->getRepository('djamaDjamaBundle:CommuneEntity')->find($formData->nomCom);
+            $commune->setNomCom($formData->nomCom->getNomCom());
+                        
+            $appreciation = $em1->getRepository('djamaDjamaBundle:AppreciationEntity')->find($formData->numAppre);
+            $appreciation->setNomAppre($formData->nomAppre->getNomAppre());
+                        
+            $paiement = $em1->getRepository('djamaDjamaBundle:PaiementEntity')->find($formData->numPai);
+            $paiement->PaiementEntity($formData);        
+         
             $em1->flush();
-            
-            $commune = new CommuneEntity();
-            $commune->CommuneEntity($dataForm);
-            $em1->persist($commune);
-            $em1->flush();
-            
-        /**
-         * A revoir le champs remarque ne marche pas 
-         */
-            
             
             $em2 = $this->getDoctrine()->getEntityManager();
-            $connection = $em2->getConnection();           var_dump($dataForm); exit;
+            $connection = $em2->getConnection();
+            
+            
+                    
             $requete = $connection->update('eleveinsreins', array(
-                'numAppre'  =>  $dataForm->nomAppre->getNumAppre(),
-                'numCom'    =>  $dataForm->nomAppre->getNomAppre(),
-                'adrElev'   =>  $dataForm->adrElev,
-                'typeIns'   =>  $dataForm->typeIns,
-                'dateIns'   =>  $dataForm->dateIns,
-                'fraisIns'  =>  $dataForm->fraisIns,
-                'nbPhoto'   =>  $dataForm->nbPhoto,
-                'cartePai'  =>  $dataForm->cartePai,
-                'badge'     =>  $dataForm->badge,
-                'bulletin'  =>  $dataForm->bulletin
+                'numAppre'  =>  $formData->nomAppre->getNumAppre(),
+                'numCom'    =>  $formData->numCom,
+                'adrElev'   =>  $formData->adrElev,
+                'typeIns'   =>  $formData->typeIns,
+                'dateIns'   =>  $formData->dateIns,
+                'fraisIns'  =>  $formData->fraisIns,
+                'nbPhoto'   =>  $formData->nbPhoto,
+                'cartePai'  =>  $formData->cartePai,
+                'badge'     =>  $formData->badge,
+                'bulletin'  =>  $formData->bulletin
             ), array(
-                'numAnnee'  =>  intval($dataForm->numAnnee),
-                'numClasse' =>  intval($dataForm->numClasse),
-                'numEleve'  =>  intval($dataForm->numEleve)
+                'numAnnee'  =>  intval($formData->numAnnee),
+                'numClasse' =>  intval($formData->numClasse),
+                'numEleve'  =>  intval($formData->numEleve)
             ));
      
             $em3 = $this->getDoctrine()->getEntityManager();
             $connexion = $em3->getConnection();
-            if ($dataForm->octobre)
+            $octobre = null;
+            $mai = null;
+            $juin = null;
+                   
+            if ($formData->octobre)
                 $octobre = 'Oui';
-            if ($dataForm->mai)
+            if ($formData->mai)
                 $mai = 'Oui';
-            if ($dataForm->juin)
+            if ($formData->juin)
                 $juin = 'Oui';
-            exit(1); //TODO : à finaliser sur       
+     
             $requeteUpdatePaiement = $connexion->update('paiement', array(
-                    'datePai1'      =>  $dataForm->datePai1,
+                    'datePai1'      =>  $formData->datePai1,
                     'octobre'       =>  $octobre,
-                    'montantOct'    =>  $dataForm->montantOct,
-                    'datePai8'      =>  $dataForm->datePai8,
+                    'montantOct'    =>  $formData->montantOct,
+                    'datePai8'      =>  $formData->datePai8,
                     'mai'           =>  $mai,
-                    'montantMai'    =>  $dataForm->montantMai,
-                    'datePai9'      =>  $dataForm->datePai9,
+                    'montantMai'    =>  $formData->montantMai,
+                    'datePai9'      =>  $formData->datePai9,
                     'juin'          =>  $juin,
-                    'montantJuin'   =>  $dataForm->montantJuin
+                    'montantJuin'   =>  $formData->montantJuin
                     ), array(
-                        'numPai'    =>  $dataForm->numPai
+                        'numPai'    =>  $formData->numPai
             ));
           
             return $this->redirect($this->generateUrl('djama_affichage_eleve'), 301);
