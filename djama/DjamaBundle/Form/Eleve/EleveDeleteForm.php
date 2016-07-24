@@ -16,7 +16,7 @@ class EleveDeleteForm extends AbstractType
         parent::buildForm($builder, $options);
         $builder
                 ->add('numPhoto', 'hidden')
-                ->add('placePhoto', 'file', array(
+                ->add('placePhoto', 'hidden', array(
                     'required'  =>  FALSE
                 ))
                 ->add('numEleve', 'hidden')

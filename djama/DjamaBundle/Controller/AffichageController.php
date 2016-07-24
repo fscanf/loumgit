@@ -591,7 +591,7 @@ class AffichageController extends Controller
             
             
                     
-            $requete = $connection->update('eleveinsreins', array(
+            $connection->update('eleveinsreins', array(
                 'numAppre'  =>  $formData->nomAppre->getNumAppre(),
                 'numCom'    =>  $formData->numCom,
                 'adrElev'   =>  $formData->adrElev,
@@ -672,7 +672,7 @@ class AffichageController extends Controller
                        elevereins.fraisIns, elevereins.nbPhoto, elevereins.cartePai,
                        elevereins.badge, elevereins.bulletin,
 
-                       picto.numPhoto, picto.placePhoto
+                       picto.numPhoto, picto.placePhoto, picto.nomPhoto
 
                     FROM djamaDjamaBundle:EleveInscrisEntity eleve,
                         djamaDjamaBundle:EleveInsReinsEntity elevereins,
@@ -695,8 +695,10 @@ class AffichageController extends Controller
                         picto.numPhoto  = pictoelev.numPhoto    AND
                         eleve.numEleve=' . $val_id
         )->getResult();
+        $theStudent = (object) $queryEleveSupp[0];
         
-        $form = $this->createForm(new EleveDeleteForm(), $queryEleveSupp[0]);
+        $form = $this->createForm(new EleveDeleteForm(), $theStudent);
+        
         $form->handleRequest($request);
         
         if ($form->isValid())

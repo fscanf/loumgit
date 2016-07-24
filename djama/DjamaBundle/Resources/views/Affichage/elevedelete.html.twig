@@ -5,6 +5,7 @@
         {% block title %}<title>{{title}}</title>{% endblock %}
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         
+        
         {#{% stylesheets %} #}
         <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/bootstrap.min.css') }}" />
         <link rel="stylesheet" href="{{ asset('bootstrap-3.3.4/css/style.css') }}" />
@@ -25,6 +26,8 @@
         {% endblock %}
             
            <h1>On djarama yo GS Kaloum</h1>
+           {#Une photo à rajouter #}
+           
            <h3>{{msg}}</h3>
            {{form_start(form, {'action': path('djama_suppression_eleve', {'val_id': val_id}), 'method': 'POST'})}} 
                 {{form_errors(form)}}
