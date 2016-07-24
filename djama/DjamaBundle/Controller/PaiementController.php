@@ -33,11 +33,9 @@ class PaiementController extends Controller
        
         if($form->isValid())
         { 
-            var_dump($form->getData()); 
-            
             $em = $this->getDoctrine()->getManager();
             $queryPaiement = $em->createQuery('  
-                SELECT tof.placePhoto, elev.sexe, elev.nom, elev.prenom, 
+                SELECT tof.placePhoto, tof.nomPhoto, elev.sexe, elev.nom, elev.prenom, 
                         paie.numPai, paie.montantMens, paie.montantAnn, paie.totalPai,
                         paie.datePai1, paie.octobre, paie.montantOct,
                         paie.datePai2, paie.novembre, paie.montantNov,
@@ -77,7 +75,7 @@ class PaiementController extends Controller
                 FROM djamaDjamaBundle:ClasseEntity clas
                 WHERE clas.numClasse = ' . $form->getData()['choix_classe']->
                       getNumClasse())->getSingleResult();
-           
+
             return $this->render('djamaDjamaBundle:Paiement:paiementeleve.html.twig', array(
                 'title'             =>  'Paiement éléve',
                 'dateDuJour'        =>  $dateDuJour,
@@ -320,13 +318,14 @@ class PaiementController extends Controller
     }
     public function paiementEleveUpdateAction(Request $request, $numEleve, $numClasse)
     {
-        $dateDuJour         = $this->dateDuJour();
+        $dateDuJour = $this->dateDuJour();
         $objetAnneeScolaire = $this->verifAnneeScolaire();
-        $anneeScolaire      = $objetAnneeScolaire['nomAnnee']; 
+        $anneeScolaire     = $objetAnneeScolaire->getNomAnnee(); 
        
         $em = $this->getDoctrine()->getManager();
             $queryPaiement = $em->createQuery('  
-                SELECT tof.placePhoto, elev.sexe, elev.nom, elev.prenom, 
+                SELECT tof.placePhoto, tof.nomPhoto,
+                        elev.sexe, elev.nom, elev.prenom, 
                         paie.numPai, paie.montantMens, paie.montantAnn, paie.totalPai,
                         paie.datePai1, paie.octobre, paie.montantOct,
                         paie.datePai2, paie.novembre, paie.montantNov,
@@ -361,66 +360,67 @@ class PaiementController extends Controller
                       elev.numEleve = ' . $numEleve
             )->getResult();
    
-        $form   =   $this->createForm(new PaiementUpdateForm(), $queryPaiement[0]);
+        $theStydentPaiementUpdate = (object) $queryPaiement[0];
+        $form   =   $this->createForm(new PaiementUpdateForm(), $theStydentPaiementUpdate);
         $form->handleRequest($request);
         if ($form->isValid())
         {
-            $formData = $form->getData(); 
-            
+            $dataForm = $form->getData(); 
+            var_dump($dataForm);//exit();
             $em = $this->getDoctrine()->getEntityManager();
             $connection = $em->getConnection();    
             $requete = $connection->update('eleveinscris', array(
-                'sexe'      =>  $formData['sexe'],
-                'nom'       =>  $formData['nom'],
-                'prenom'    =>  $formData['prenom']
+                'sexe'      =>  $dataForm->sexe,
+                'nom'       =>  $dataForm->nom,
+                'prenom'    =>  $dataForm->prenom
             ), array(
-                'numEleve'  =>  intval($formData['numEleve'])
+                'numEleve'  =>  intval($dataForm->numEleve)
             ));
             $em2 = $this->getDoctrine()->getEntityManager();
             $connex =   $em2->getConnection();
             $requetePaiement = $connex->update('paiement', array(
-                'montantMens'   =>  $formData['montantMens'],
-                'montantAnn'    =>  $formData['montantAnn'],
-                'totalPai'      =>  $formData['totalPai'],
-                'datePai1'      =>  $formData['datePai1'],
-                'octobre'       =>  $formData['octobre'],
-                'montantOct'    =>  $formData['montantOct'],
-                'datePai2'      =>  $formData['datePai2'],
-                'novembre'      =>  $formData['novembre'],
-                'montantNov'    =>  $formData['montantNov'],
-                'datePai3'      =>  $formData['datePai3'],
-                'decembre'      =>  $formData['decembre'],
-                'montantDec'    =>  $formData['montantDec'],
-                'datePai4'      =>  $formData['datePai4'],
-                'janvier'       =>  $formData['janvier'],
-                'montantJan'    =>  $formData['montantJan'],
-                'datePai5'      =>  $formData['datePai5'],
-                'fevrier'       =>  $formData['fevrier'],
-                'montantFev'    =>  $formData['montantFev'],
-                'datePai6'      =>  $formData['datePai6'],
-                'mars'          =>  $formData['mars'],
-                'montantMars'   =>  $formData['montantMars'],
-                'datePai7'      =>  $formData['datePai7'],
-                'avril'         =>  $formData['avril'],
-                'montantAv'     =>  $formData['montantAv'],
-                'datePai8'      =>  $formData['datePai8'],
-                'mai'           =>  $formData['mai'],
-                'montantMai'    =>  $formData['montantMai'],
-                'datePai9'      =>  $formData['datePai9'],
-                'juin'          =>  $formData['juin'],
-                'montantJuin'   =>  $formData['montantJuin']
+                'montantMens'   =>  $dataForm->montantMens,
+                'montantAnn'    =>  $dataForm->montantAnn,
+                'totalPai'      =>  $dataForm->totalPai,
+                'datePai1'      =>  $dataForm->datePai1,
+                'octobre'       =>  $dataForm->octobre,
+                'montantOct'    =>  $dataForm->montantOct,
+                'datePai2'      =>  $dataForm->datePai2,
+                'novembre'      =>  $dataForm->novembre,
+                'montantNov'    =>  $dataForm->montantNov,
+                'datePai3'      =>  $dataForm->datePai3,
+                'decembre'      =>  $dataForm->decembre,
+                'montantDec'    =>  $dataForm->montantDec,
+                'datePai4'      =>  $dataForm->datePai4,
+                'janvier'       =>  $dataForm->janvier,
+                'montantJan'    =>  $dataForm->montantJan,
+                'datePai5'      =>  $dataForm->datePai5,
+                'fevrier'       =>  $dataForm->fevrier,
+                'montantFev'    =>  $dataForm->montantFev,
+                'datePai6'      =>  $dataForm->datePai6,
+                'mars'          =>  $dataForm->mars,
+                'montantMars'   =>  $dataForm->montantMars,
+                'datePai7'      =>  $dataForm->datePai7,
+                'avril'         =>  $dataForm->avril,
+                'montantAv'     =>  $dataForm->montantAv,
+                'datePai8'      =>  $dataForm->datePai8,
+                'mai'           =>  $dataForm->mai,
+                'montantMai'    =>  $dataForm->montantMai,
+                'datePai9'      =>  $dataForm->datePai9,
+                'juin'          =>  $dataForm->juin,
+                'montantJuin'   =>  $dataForm->montantJuin
             ), array(
-               'numPai'         =>  $formData['numPai'] 
-            ));
+               'numPai'         =>  $dataForm->numPai
+            ));            
             $em3 = $this->getDoctrine()->getEntityManager();
             $connec = $em3->getConnection();
             $connec->update('eleveinscrispaiement', array(
-                'commentaire'   =>  $formData['commentaire']
+                'commentaire'   =>  $dataForm->commentaire
             ), array(
-                'numEleve'      =>  $formData['numEleve'],
-                'numPai'        =>  $formData['numPai'],
-                'numAnnee'      =>  $objetAnneeScolaire['numAnnee'],
-                'numAppre'      =>  $formData['nomAppre']->getNumAppre()
+                'numEleve'      =>  $dataForm->numEleve,
+                'numPai'        =>  $dataForm->numPai,
+                'numAnnee'      =>  $objetAnneeScolaire->getNumAnnee(),
+                'numAppre'      =>  $dataForm->nomAppre->getNumAppre()
             ));
            
             return $this->redirect($this->generateUrl('djama_paiement_eleve'), 301);
@@ -431,21 +431,33 @@ class PaiementController extends Controller
                 'dateDuJour'        =>  $dateDuJour,
                 'anneeScolaire'     =>  $anneeScolaire,
                 'form'              =>  $form->createView(),
-                'numEleve'            =>  $numEleve,
+                'numEleve'          =>  $numEleve,
+                'sexe'              => $theStydentPaiementUpdate->sexe,
+                'nom'               => $theStydentPaiementUpdate->nom,
+                'prenom'            => $theStydentPaiementUpdate->prenom,
+                'datePai1'           => $theStydentPaiementUpdate->datePai1,
+                'octobre'           => $theStydentPaiementUpdate->octobre,
+                'montantOct'        => $theStydentPaiementUpdate->montantOct,
+                'datePai9'           => $theStydentPaiementUpdate->datePai9,
+                'juin'              => $theStydentPaiementUpdate->juin, 
+                'montantJuin'       => $theStydentPaiementUpdate->montantJuin,
+                'photo'             => $theStydentPaiementUpdate->placePhoto . $theStydentPaiementUpdate->nomPhoto,
                 'numClasse'           =>  $numClasse,
-                'montantAnn'        =>  $queryPaiement[0]['montantAnn'],
-                'totalPai'          =>  $queryPaiement[0]['totalPai'],
+                'montantAnn'        =>  $theStydentPaiementUpdate->montantAnn,
+                'totalPai'          =>  $theStydentPaiementUpdate->totalPai,
         ));
     }
+    //TODO: methode a revoir
     public function paiementEleveDeleteAction(Request $request, $numEleve, $numClasse)
     {
-        $dateDuJour         = $this->dateDuJour();
+        $dateDuJour = $this->dateDuJour();
         $objetAnneeScolaire = $this->verifAnneeScolaire();
-        $anneeScolaire      = $objetAnneeScolaire['nomAnnee']; 
+        $anneeScolaire     = $objetAnneeScolaire->getNomAnnee(); 
         
         $em = $this->getDoctrine()->getManager();
             $queryPaiement = $em->createQuery('  
-                SELECT tof.placePhoto, elev.sexe, elev.nom, elev.prenom, 
+                SELECT tof.placePhoto, tof.nomPhoto,
+                        elev.sexe, elev.nom, elev.prenom, 
                         paie.numPai, paie.montantMens, paie.montantAnn, paie.totalPai,
                         paie.datePai1, paie.octobre, paie.montantOct,
                         paie.datePai2, paie.novembre, paie.montantNov,
@@ -483,11 +495,12 @@ class PaiementController extends Controller
                       clas.numClasse = ' . $numClasse .         'AND
                       elev.numEleve = ' . $numEleve
             )->getResult();
-            
-            $form = $this->createForm(new PaiementDeleteForm(), $queryPaiement[0]);
+            $theStydentPaiementDelete = (object)$queryPaiement[0];
+            $form = $this->createForm(new PaiementDeleteForm(), $theStydentPaiementDelete);exit;
             $form->handleRequest($request);
             if ($form->isValid())
             {
+                                var_dump("onbjoour"); exit;
                 $formData = $form->getData();
                if ($form->get('Supprimer')->isClicked())
                {
@@ -512,7 +525,7 @@ class PaiementController extends Controller
                }
                 var_dump($form->getData());
                exit('suppression'); 
-            }
+            }var_dump($form); exit;
             return $this->render('djamaDjamaBundle:Paiement:paiementelevedelete.html.twig', array(
                 'title'             =>  'Suppression paiement',
                 'dateDuJour'        =>  $dateDuJour,

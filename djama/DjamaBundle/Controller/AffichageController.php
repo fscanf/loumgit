@@ -408,6 +408,7 @@ class AffichageController extends Controller
        
         $form = $this->createForm(new ChoixMultipleForm());
         $form->handleRequest($request);
+        
         if ($form->isValid())
         {
             $numClasse = $form->getData()['choix_classe']->getnumClasse();

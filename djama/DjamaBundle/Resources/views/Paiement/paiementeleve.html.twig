@@ -106,7 +106,7 @@
                                     {% if elevePaiement['placePhoto'] is null %}
                                         <td class="color_rougeViolet">Manque Photo</td>
                                     {% else %}
-                                        <td>{{elevePaiement['placePhoto']}}</td>
+                                        <td><img src="{{asset(elevePaiement['placePhoto']~elevePaiement['nomPhoto'])}}" width="{{70}}px" height="{{70}}px" /></td>
                                     {% endif %}
                                     {% if elevePaiement['sexe'] is null %}
                                         <td class="color_rougeViolet">VIDE</td>
@@ -293,7 +293,7 @@
                                     {% if elevePaiement['placePhoto'] is null %}
                                         <td style="background-color: #FF6347;">Manque Photo</td>
                                     {% else %}
-                                        <td>{{elevePaiement['placePhoto']}}</td>
+                                        <td><img src="{{asset(elevePaiement['placePhoto']~elevePaiement['nomPhoto'])}}" width="{{70}}px" height="{{70}}px" /></td>
                                     {% endif %}
                                     {% if elevePaiement['sexe'] is null %}
                                         <td style="background-color: #FF6347;">VIDE</td>

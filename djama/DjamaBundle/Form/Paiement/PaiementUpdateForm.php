@@ -16,32 +16,17 @@ class PaiementUpdateForm extends AbstractType
     {
         parent::buildForm($builder, $options);
         $builder
+                 ->add('montantMens', 'number')
                 ->add('numEleve', 'hidden')
                 ->add('numPai', 'hidden')
-                /*->add('photo', 'file', array(
-                    'required'  =>  false
-                ))*/
-                ->add('sexe', 'choice', array(
-                    'choices'   =>  array(
-                    'M'     =>  'Masculin',
-                    'F'     =>  'Feminin'
-                   )
-                ))
-                ->add('nom',    'text')
-                ->add('prenom', 'text')
-                ->add('montantMens', 'number')
-                ->add('datePai1', 'text', array(
+                ->add('sexe', 'hidden')
+                ->add('nom',    'hidden')
+                ->add('prenom', 'hidden')
+                ->add('datePai1', 'hidden', array(
                     'max_length'    =>  12
                 ))
-                ->add('octobre', 'choice', array(
-                    'required'  =>  false,
-                    'choices'   =>  array(
-                    'Non'   =>  'Non',
-                    'Oui'   =>  'Oui'                        
-                )))
-                ->add('montantOct', 'number', array(
-                        'required'  =>  false,
-                ))
+                ->add('octobre', 'hidden')
+                ->add('montantOct', 'hidden')
                 ->add('datePai2', 'text', array(
                     'required'  =>  false,
                     'max_length'    =>  12
@@ -140,20 +125,9 @@ class PaiementUpdateForm extends AbstractType
                 ->add('montantMai', 'number', array(
                     'required'  =>  false,
                 ))
-                ->add('datePai9', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('juin', 'choice', array(
-                    'required'  =>  false,
-                    'choices'   =>  array(
-                        'Non'   =>  'Non',
-                        'Oui'   =>  'Oui'                        
-                    )
-                ))
-                ->add('montantJuin', 'number', array(
-                    'required'  =>  false,
-                ))
+                ->add('datePai9', 'hidden')
+                ->add('juin', 'hidden')
+                ->add('montantJuin', 'hidden')
                 ->add('numAppre', 'hidden')
                 ->add('nomAppre',   'entity', array(
                     'class'     =>  'djamaDjamaBundle:AppreciationEntity',

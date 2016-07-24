@@ -30,6 +30,7 @@
             {{form_errors(form)}}
             <!--afficher ici la photo -->
             <div class="elevediv">
+                <img src="{{asset(photo)}}" width="{{70}}px" height="{{70}}px" />
                 {{form_errors(form.sexe)}}
                 {{form_label(form.sexe, 'Sexe :')}}
                 {{form_widget(form.sexe)}}
