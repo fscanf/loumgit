@@ -24,13 +24,16 @@ class PaiementController extends Controller
 {
     public function paiementEleveAction(Request $request)
     {
-        $arrayDataClasse = explode('=', $request->getQueryString());
-        $numClasse = $arrayDataClasse[1];
-        if($numClasse)
-        {
-            $dateDuJour = $this->dateDuJour();
-            $objetAnneeScolaire = $this->verifAnneeScolaire();
-            $anneeScolaire     = $objetAnneeScolaire['nomAnnee']; 
+        $dateDuJour = $this->dateDuJour();
+        $objetAnneeScolaire = $this->verifAnneeScolaire();
+        $anneeScolaire     = $objetAnneeScolaire->getNomAnnee(); 
+       
+        $form = $this->createForm(new ChoixMultipleForm());
+        $form->handleRequest($request);
+       
+        if($form->isValid())
+        { 
+            var_dump($form->getData()); 
             
             $em = $this->getDoctrine()->getManager();
             $queryPaiement = $em->createQuery('  
@@ -66,14 +69,15 @@ class PaiementController extends Controller
                       elev.numEleve = tofElev.numEleve          AND
                       tof.numPhoto  = tofElev.numPhoto          AND
                       appr.numAppre = paiementEleve.numAppre    AND
-                      eleReins.numClasse = ' . $numClasse
+                      eleReins.numClasse = ' . $form->getData()['choix_classe']->
+                      getNumClasse()
             )->getResult();
             $classeName = $em->createQuery('
                 SELECT clas.nomClasse
                 FROM djamaDjamaBundle:ClasseEntity clas
-                WHERE clas.numClasse = ' . $numClasse)->getSingleResult();
+                WHERE clas.numClasse = ' . $form->getData()['choix_classe']->
+                      getNumClasse())->getSingleResult();
            
-            
             return $this->render('djamaDjamaBundle:Paiement:paiementeleve.html.twig', array(
                 'title'             =>  'Paiement éléve',
                 'dateDuJour'        =>  $dateDuJour,
@@ -121,14 +125,11 @@ class PaiementController extends Controller
             )); 
             
         }
-        $dateDuJour = $this->dateDuJour();
-        $objetAnneeScolaire = $this->verifAnneeScolaire();
-        $anneeScolaire     = $objetAnneeScolaire['nomAnnee']; 
-       
-        $form = $this->createForm(new ChoixMultipleForm());
-        $form->handleRequest($request);
+               
+        
+        //partie génération pdf
         if ($form->isValid())
-        {
+        { exit ('Partie exporter fichier pdf');
             /*
             $loader = new PHPPdf\Core\Configuration\LoaderImpl();
             $loader->setFontFile(*//* path to fonts configuration file *//*);
@@ -284,6 +285,7 @@ class PaiementController extends Controller
                 'lstPaiement'       =>  $queryPaiement
             )); 
         }
+        //partie affichage par defaut
         return $this->render('djamaDjamaBundle:Paiement:paiementeleve.html.twig', array(
             'title'             =>  'Paiement éléve',
             'dateDuJour'        =>  $dateDuJour,
