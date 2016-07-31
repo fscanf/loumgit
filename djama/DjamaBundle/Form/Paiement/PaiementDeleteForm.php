@@ -17,112 +17,43 @@ class PaiementDeleteForm extends AbstractType
         $builder
                 ->add('numEleve', 'hidden')
                 ->add('numPai', 'hidden')
-                /*->add('photo', 'file', array(
-                    'required'  =>  false
-                ))*/
-                ->add('sexe', 'text')
-                ->add('nom',    'text')
-                ->add('prenom', 'text')
-                ->add('montantMens', 'number')
-                ->add('montantAnn', 'number')
-                ->add('totalPai', 'number')
-                ->add('datePai1', 'text', array(
-                    'max_length'    =>  12,
-                    'required'      =>  false
-                ))
-                ->add('octobre', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantOct', 'number', array(
-                        'required'  =>  false,
-                ))
-                ->add('datePai2', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('novembre',   'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantNov', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai3', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('decembre', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantDec', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai4', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('janvier', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantJan', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai5', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('fevrier', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantFev', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai6', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('mars', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantMars', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai7', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('avril', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantAv', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai8', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('mai', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantMai', 'number', array(
-                    'required'  =>  false,
-                ))
-                ->add('datePai9', 'text', array(
-                    'required'  =>  false,
-                    'max_length'    =>  12
-                ))
-                ->add('juin', 'text', array(
-                    'required'      =>  false
-                ))
-                ->add('montantJuin', 'number', array(
-                    'required'  =>  false,
-                ))
+                ->add('numPhoto', 'hidden')
+                ->add('sexe', 'hidden')
+                ->add('nom',    'hidden')
+                ->add('prenom', 'hidden')
+                ->add('montantMens', 'hidden')
+                ->add('montantAnn', 'hidden')
+                ->add('totalPai', 'hidden')
+                ->add('datePai1', 'hidden')
+                ->add('octobre', 'hidden')
+                ->add('montantOct', 'hidden')
+                ->add('datePai2', 'hidden')
+                ->add('novembre',   'hidden')
+                ->add('montantNov', 'hidden')
+                ->add('datePai3', 'hidden')
+                ->add('decembre', 'hidden')
+                ->add('montantDec', 'hidden')
+                ->add('datePai4', 'hidden')
+                ->add('janvier', 'hidden')
+                ->add('montantJan', 'hidden')
+                ->add('datePai5', 'hidden')
+                ->add('fevrier', 'hidden')
+                ->add('montantFev', 'hidden')
+                ->add('datePai6', 'hidden')
+                ->add('mars', 'hidden')
+                ->add('montantMars', 'hidden')
+                ->add('datePai7', 'hidden')
+                ->add('avril', 'hidden')
+                ->add('montantAv', 'hidden')
+                ->add('datePai8', 'hidden')
+                ->add('mai', 'hidden')
+                ->add('montantMai', 'hidden')
+                ->add('datePai9', 'hidden')
+                ->add('juin', 'hidden')
+                ->add('montantJuin', 'hidden')
                 ->add('numAppre', 'hidden')
-                ->add('nomAppre',   'text', array(
-                    'required'      =>  false
-                ))
-                ->add('commentaire', 'textarea', array(
-                    'required'  =>  false,
-                ))
+                ->add('nomAppre',   'hidden')
+                ->add('commentaire', 'hidden')
                 ->add('Supprimer', 'submit')
                 ->add('Annuller', 'submit')
                ;

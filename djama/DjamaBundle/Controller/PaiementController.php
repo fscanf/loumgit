@@ -366,7 +366,6 @@ class PaiementController extends Controller
         if ($form->isValid())
         {
             $dataForm = $form->getData(); 
-            var_dump($dataForm);//exit();
             $em = $this->getDoctrine()->getEntityManager();
             $connection = $em->getConnection();    
             $requete = $connection->update('eleveinscris', array(
@@ -471,7 +470,9 @@ class PaiementController extends Controller
                         paiementEleve.commentaire, 
                         elev.numEleve,
                         clas.numClasse,
-                        tof.numPhoto
+                        tof.numPhoto,
+                        appr.numAppre,
+                        appr.nomAppre
                         
                         
                 FROM djamaDjamaBundle:EleveInscrisEntity elev,
@@ -496,24 +497,25 @@ class PaiementController extends Controller
                       elev.numEleve = ' . $numEleve
             )->getResult();
             $theStydentPaiementDelete = (object)$queryPaiement[0];
-            $form = $this->createForm(new PaiementDeleteForm(), $theStydentPaiementDelete);exit;
+            $form = $this->createForm(new PaiementDeleteForm(), $theStydentPaiementDelete);
             $form->handleRequest($request);
             if ($form->isValid())
             {
-                                var_dump("onbjoour"); exit;
                 $formData = $form->getData();
+                
+                
                if ($form->get('Supprimer')->isClicked())
                {
                     $em2 = $this->getDoctrine()->getEntityManager();
                     $connexion = $em2->getConnection();
                     $connexion->delete('eleveinscris', array(
-                    'numEleve'  =>  $formData['numEleve'] 
+                    'numEleve'  =>  $formData->numEleve
                     ));
                    $connexion->delete('paiement', array(
-                    'numPai'  =>  $formData['numPai'] 
+                    'numPai'  =>  $formData->numPai 
                     ));
                    $connexion->delete('photo', array(
-                    'numPhoto'  =>  $formData['numPhoto'] 
+                    'numPhoto'  =>  $formData->numPhoto 
                     ));
                     
                     return $this->redirect($this->generateUrl('djama_paiement_eleve', 
@@ -523,16 +525,17 @@ class PaiementController extends Controller
                {
                    return $this->redirect($this->generateUrl('djama_paiement_eleve'), 301);
                }
-                var_dump($form->getData());
-               exit('suppression'); 
-            }var_dump($form); exit;
+                
+            }
             return $this->render('djamaDjamaBundle:Paiement:paiementelevedelete.html.twig', array(
                 'title'             =>  'Suppression paiement',
                 'dateDuJour'        =>  $dateDuJour,
                 'anneeScolaire'     =>  $anneeScolaire,
                 'form'              =>  $form->createView(),
-                'numEleve'            =>  $queryPaiement[0]['numEleve'],
-                'numClasse'           =>  $queryPaiement[0]['numClasse']
+                'numEleve'            =>  $theStydentPaiementDelete->numEleve,
+                'numClasse'           =>  $theStydentPaiementDelete->numClasse,
+                'photo'    =>  $theStydentPaiementDelete->placePhoto . $theStydentPaiementDelete->nomPhoto,
+                'person' => $theStydentPaiementDelete
             ));        
     }
     public function paiementAnnuelleEleveAction()
