@@ -87,7 +87,7 @@ class AffichageController extends Controller
     }
     public function matiereUpdateAction(Request $request, $val_id)
     {
-        $em = $this->getDoctrine()->getRepository('MatiereEntity');
+        $em = $this->getDoctrine()->getRepository('djamaDjamaBundle:MatiereEntity');
         $queryObjectMatiere = $em->find($val_id);
         
         $form = $this->createForm(new MatiereUpdateForm(), $queryObjectMatiere);
@@ -110,7 +110,7 @@ class AffichageController extends Controller
     }
     public function matiereDeleteAction(Request $request, $val_id)
     {
-        $em = $this->getDoctrine()->getRepository('MatiereEntity');
+        $em = $this->getDoctrine()->getRepository('djamaDjamaBundle:MatiereEntity');
         $queryObjectMatiere = $em->find($val_id);
         
         $form = $this->createForm(new MatiereUpdateForm(), $queryObjectMatiere);
@@ -154,8 +154,8 @@ class AffichageController extends Controller
         ));
     }
     public function communeUpdateAction(Request $request, $val_id)
-    {
-        $em = $this->getDoctrine()->getRepository('CommuneEntity');
+    { 
+        $em = $this->getDoctrine()->getRepository('djamaDjamaBundle:CommuneEntity');
         $queryObjectCommune = $em->find($val_id);
         $form = $this->createForm(new CommuneForm(), $queryObjectCommune);
         $form->handleRequest($request);
@@ -177,7 +177,7 @@ class AffichageController extends Controller
     }
     public function communeDeleteAction(Request $request, $val_id) 
     {
-        $em = $this->getDoctrine()->getRepository('CommuneEntity');
+        $em = $this->getDoctrine()->getRepository('djamaDjamaBundle:CommuneEntity');
         $queryObjectCommune = $em->find($val_id);
         
         $form = $this->createForm(new CommuneForm(), $queryObjectCommune);
@@ -224,7 +224,7 @@ class AffichageController extends Controller
     }
     public function classeUpdateAction(Request $request, $val_id)
     {
-        $em = $this->getDoctrine()->getRepository('ClasseEntity');
+        $em = $this->getDoctrine()->getRepository('djamaDjamaBundle:ClasseEntity');
         $queryObjectClasse = $em->find($val_id);
         
         $form = $this->createForm(new ClasseForm(), $queryObjectClasse);
