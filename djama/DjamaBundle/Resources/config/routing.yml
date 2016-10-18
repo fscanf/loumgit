@@ -24,7 +24,7 @@ djama_suppression_matiere:
     defaults: { _controller: djamaDjamaBundle:Affichage:matiereDelete }
     
 djama_affichage_commune:
-    path:     /affichagecommune
+    path:     /listecommune
     defaults: { _controller: djamaDjamaBundle:Affichage:commune }
     
 djama_modification_commune:
@@ -103,6 +103,9 @@ djama_paiement_etatpaiement:
     path:     /etatpaiement
     defaults: { _controller: djamaDjamaBundle:Paiement:etatPaiement}
 
+djama_connexion : 
+    path: /connexion
+    defaults: {_controller: djamaDjamaBundle:Connexion:toLog}
 #djama_photo:
 #    path:     /photo
 #    defaults: { _controller: djamaDjamaBundle:UploadFile:photo }
