@@ -103,15 +103,14 @@ djama_paiement_etatpaiement:
     path:     /etatpaiement
     defaults: { _controller: djamaDjamaBundle:Paiement:etatPaiement}
 
-djama_connexion : 
-    path: /connexion
-    defaults: {_controller: djamaDjamaBundle:Connexion:toLog}
+#djama_connexion : 
+#    path: /admin
+#    defaults: {_controller: djamaDjamaBundle:Security:admin}
 #djama_photo:
 #    path:     /photo
 #    defaults: { _controller: djamaDjamaBundle:UploadFile:photo }
 
 
-    
 djama_insertion:
     path:     /insertion
     defaults: { _controller: djamaDjamaBundle:UploadFile:show }

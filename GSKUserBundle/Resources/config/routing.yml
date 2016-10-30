@@ -1,0 +1,13 @@
+gsk_user_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: GSKUserBundle:Default:index }
+    
+login:
+    pattern: /login
+    defaults: { _controller: GSKUserBundle:Security:login }
+login_check:
+    pattern: /login_check
+    
+road_logout:
+    pattern: /logout
+#    defaults: { _controller: GSKUserBundle:Security:loginOut }

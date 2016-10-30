@@ -5,6 +5,13 @@
     </head>
     <body>
         <h3>{{msgbienvenue}}</h3>
+        <h4>userName : {{ app.user.username }}</h4>
+        {% if is_granted('ROLE_USER') %}
+            <h1>Vous avez le role user</h1>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+            <h1>Vous avez le role admin</h1>
+        {% endif %}
     </body>
 </html>
 {# empty Twig template #}

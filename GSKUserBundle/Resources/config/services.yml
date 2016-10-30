@@ -1,0 +1,4 @@
+services:
+#    gsk_user.example:
+#        class: GSKUserBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
